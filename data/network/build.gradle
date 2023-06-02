@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.version)
-    alias(libs.plugins.kotlin.serialization.version)
+    alias(libs.plugins.kotlin.serialization)
     id 'kotlin-parcelize'
 }
 

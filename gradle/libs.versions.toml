@@ -44,7 +44,7 @@ kotlinx-coroutines={ group="org.jetbrains.kotlinx" , name="kotlinx-coroutines-an
 kotlin-version = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 org-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 com-android-application = { id = "com.android.application", version.ref = "agp" }
-kotlin-serialization-version = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless_version" }
 
