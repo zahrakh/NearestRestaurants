@@ -16,3 +16,6 @@ rootProject.name = "NearestRestaurants"
 include ':app'
 include ':data:model'
 include ':data:network'
+include ':domain'
+include ':presentation'
+include ':data:repository'
