@@ -4,46 +4,46 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class RestaurantsResponse(
+data class RestaurantsResponseDto(
     @SerialName("Area"              ) var Area              : String?                   = null,
-    @SerialName("MetaData"          ) var MetaData          : MetaData?                 = null,
-    @SerialName("Restaurants"       ) var Restaurants       : ArrayList<Restaurants>    = arrayListOf(),
+    @SerialName("MetaData"          ) var MetaData          : MetaDataDto?                 = null,
+    @SerialName("Restaurants"       ) var Restaurants       : ArrayList<RestaurantsDto>    = arrayListOf(),
     @SerialName("ShortResultText"   ) var ShortResultText   : String?                   = null,
-    @SerialName("deliveryFees"      ) var deliveryFees      : DeliveryFees?             = null,
-    @SerialName("promotedPlacement" ) var promotedPlacement : PromotedPlacement?        = null,
-    @SerialName("RestaurantSets"    ) var RestaurantSets    : ArrayList<RestaurantSets> = arrayListOf(),
-    @SerialName("CuisineSets"       ) var CuisineSets       : ArrayList<CuisineSets>    = arrayListOf(),
-    @SerialName("Views"             ) var Views             : ArrayList<Views>          = arrayListOf(),
+    @SerialName("deliveryFees"      ) var deliveryFees      : DeliveryFeesDto?             = null,
+    @SerialName("promotedPlacement" ) var promotedPlacement : PromotedPlacementDto?        = null,
+    @SerialName("RestaurantSets"    ) var RestaurantSets    : ArrayList<RestaurantSetsDto> = arrayListOf(),
+    @SerialName("CuisineSets"       ) var CuisineSets       : ArrayList<CuisineSetsDto>    = arrayListOf(),
+    @SerialName("Views"             ) var Views             : ArrayList<ViewsDto>          = arrayListOf(),
     @SerialName("Dishes"            ) var Dishes            : ArrayList<String>         = arrayListOf()
 )
 
 @Serializable
-data class MetaData (
+data class MetaDataDto (
     @SerialName("CanonicalName"                             ) var CanonicalName:String? = null,
     @SerialName("District"                                  ) var District:String? = null,
     @SerialName("Postcode"                                  ) var Postcode:String? = null,
     @SerialName("Area"                                      ) var Area:String? = null,
     @SerialName("Latitude"                                  ) var Latitude:Double?=null,
     @SerialName("Longitude"                                 ) var Longitude:Double?= null,
-    @SerialName("CuisineDetails"                            ) var CuisineDetails:ArrayList<CuisineDetails> = arrayListOf(),
+    @SerialName("CuisineDetails"                            ) var CuisineDetails:ArrayList<CuisineDetailsDto> = arrayListOf(),
     @SerialName("ResultCount"                               ) var ResultCount:Int?= null,
     @SerialName("SearchedTerms"                             ) var SearchedTerms:String?= null,
-    @SerialName("TagDetails"                                ) var TagDetails: ArrayList<TagDetails> = arrayListOf(),
+    @SerialName("TagDetails"                                ) var TagDetails: ArrayList<TagDetailsDto> = arrayListOf(),
     @SerialName("CollectionExperimentInjectedRestaurantIds" ) var CollectionExperimentInjectedRestaurantIds : String?                   = null,
     @SerialName("DeliveryArea"                              ) var DeliveryArea:String?= null
 )
 
 @Serializable
-data class Restaurants (
+data class RestaurantsDto (
     @SerialName("Id"                          ) var Id                          : Int?                     = null,
     @SerialName("Name"                        ) var Name                        : String?                  = null,
     @SerialName("UniqueName"                  ) var UniqueName                  : String?                  = null,
-    @SerialName("Address"                     ) var Address                     : Address?                 = null,
+    @SerialName("Address"                     ) var Address                     : AddressDto?                 = null,
     @SerialName("City"                        ) var City                        : String?                  = null,
     @SerialName("Postcode"                    ) var Postcode                    : String?                  = null,
-    @SerialName("Latitude"                    ) var Latitude                    : Double?                     = null,
-    @SerialName("Longitude"                   ) var Longitude                   : Double?                     = null,
-    @SerialName("Rating"                      ) var Rating                      : Rating?                  = null,
+    @SerialName("Latitude"                    ) var Latitude                    : Double?                  = null,
+    @SerialName("Longitude"                   ) var Longitude                   : Double?                  = null,
+    @SerialName("Rating"                      ) var Rating                      : RatingDto?                  = null,
     @SerialName("RatingStars"                 ) var RatingStars                 : Double?                  = null,
     @SerialName("NumberOfRatings"             ) var NumberOfRatings             : Int?                     = null,
     @SerialName("RatingAverage"               ) var RatingAverage               : Double?                  = null,
@@ -70,7 +70,7 @@ data class Restaurants (
     @SerialName("DeliveryTime"                ) var DeliveryTime                : String?                  = null,
     @SerialName("DeliveryTimeMinutes"         ) var DeliveryTimeMinutes         : String?                  = null,
     @SerialName("DeliveryWorkingTimeMinutes"  ) var DeliveryWorkingTimeMinutes  : Int?                     = null,
-    @SerialName("DeliveryEtaMinutes"          ) var DeliveryEtaMinutes          : DeliveryEtaMinutes?      = null,
+    @SerialName("DeliveryEtaMinutes"          ) var DeliveryEtaMinutes          : DeliveryEtaMinutesDto?      = null,
     @SerialName("IsCollection"                ) var IsCollection                : Boolean?                 = null,
     @SerialName("IsDelivery"                  ) var IsDelivery                  : Boolean?                 = null,
     @SerialName("IsFreeDelivery"              ) var IsFreeDelivery              : Boolean?                 = null,
@@ -82,13 +82,13 @@ data class Restaurants (
     @SerialName("DeliveryMenuId"              ) var DeliveryMenuId              : String?                  = null,
     @SerialName("CollectionMenuId"            ) var CollectionMenuId            : String?                  = null,
     @SerialName("DeliveryZipcode"             ) var DeliveryZipcode             : String?                  = null,
-    @SerialName("DeliveryCost"                ) var DeliveryCost                : Double?                     = null,
-    @SerialName("MinimumDeliveryValue"        ) var MinimumDeliveryValue        : Double?                     = null,
-    @SerialName("SecondDateRanking"           ) var SecondDateRanking           : Double?                     = null,
+    @SerialName("DeliveryCost"                ) var DeliveryCost                : Double?                  = null,
+    @SerialName("MinimumDeliveryValue"        ) var MinimumDeliveryValue        : Double?                  = null,
+    @SerialName("SecondDateRanking"           ) var SecondDateRanking           : Double?                  = null,
     @SerialName("DefaultDisplayRank"          ) var DefaultDisplayRank          : Int?                     = null,
     @SerialName("SponsoredPosition"           ) var SponsoredPosition           : Int?                     = null,
-    @SerialName("SecondDateRank"              ) var SecondDateRank              : Double?                     = null,
-    @SerialName("Score"                       ) var Score                       : Double?                     = null,
+    @SerialName("SecondDateRank"              ) var SecondDateRank              : Double?                  = null,
+    @SerialName("Score"                       ) var Score                       : Double?                  = null,
     @SerialName("IsTemporaryBoost"            ) var IsTemporaryBoost            : Boolean?                 = null,
     @SerialName("IsSponsored"                 ) var IsSponsored                 : Boolean?                 = null,
     @SerialName("IsPremier"                   ) var IsPremier                   : Boolean?                 = null,
@@ -104,37 +104,37 @@ data class Restaurants (
     @SerialName("LastUpdated"                 ) var LastUpdated                 : String?                  = null,
     @SerialName("Deals"                       ) var Deals                       : ArrayList<String>        = arrayListOf(),
     @SerialName("Offers"                      ) var Offers                      : ArrayList<String>        = arrayListOf(),
-    @SerialName("Logo"                        ) var Logo                        : ArrayList<Logo>          = arrayListOf(),
+    @SerialName("Logo"                        ) var Logo                        : ArrayList<LogoDto>          = arrayListOf(),
     @SerialName("Tags"                        ) var Tags                        : ArrayList<String>        = arrayListOf(),
     @SerialName("DeliveryChargeBands"         ) var DeliveryChargeBands         : ArrayList<String>        = arrayListOf(),
-    @SerialName("CuisineTypes"                ) var CuisineTypes                : ArrayList<CuisineTypes>  = arrayListOf(),
-    @SerialName("Cuisines"                    ) var Cuisines                    : ArrayList<Cuisines>      = arrayListOf(),
-    @SerialName("ScoreMetaData"               ) var ScoreMetaData               : ArrayList<ScoreMetaData> = arrayListOf(),
+    @SerialName("CuisineTypes"                ) var CuisineTypes                : ArrayList<CuisineTypesDto>  = arrayListOf(),
+    @SerialName("Cuisines"                    ) var Cuisines                    : ArrayList<CuisinesDto>      = arrayListOf(),
+    @SerialName("ScoreMetaData"               ) var ScoreMetaData               : ArrayList<ScoreMetaDataDto> = arrayListOf(),
     @SerialName("Badges"                      ) var Badges                      : ArrayList<String>        = arrayListOf(),
     @SerialName("OpeningTimes"                ) var OpeningTimes                : ArrayList<String>        = arrayListOf(),
     @SerialName("ServiceableAreas"            ) var ServiceableAreas            : ArrayList<String>        = arrayListOf()
 )
 
 @Serializable
-data class DeliveryEtaMinutes (
+data class DeliveryEtaMinutesDto (
     @SerialName("Approximate" ) var Approximate : String? = null,
     @SerialName("RangeLower"  ) var RangeLower  : Int?    = null,
     @SerialName("RangeUpper"  ) var RangeUpper  : Int?    = null
 )
 
 @Serializable
-data class ScoreMetaData (
+data class ScoreMetaDataDto (
     @SerialName("Key"   ) var Key   : String? = null,
     @SerialName("Value" ) var Value : String? = null
 )
 
 @Serializable
-data class Logo (
+data class LogoDto (
     @SerialName("StandardResolutionURL" ) var StandardResolutionURL : String? = null
 )
 
 @Serializable
-data class CuisineTypes (
+data class CuisineTypesDto(
     @SerialName("Id"           ) var Id           : Int?     = null,
     @SerialName("IsTopCuisine" ) var IsTopCuisine : Boolean? = null,
     @SerialName("Name"         ) var Name         : String?  = null,
@@ -142,7 +142,7 @@ data class CuisineTypes (
 )
 
 @Serializable
-data class Address (
+data class AddressDto (
     @SerialName("City"      ) var City      : String? = null,
     @SerialName("FirstLine" ) var FirstLine : String? = null,
     @SerialName("Postcode"  ) var Postcode  : String? = null,
@@ -151,87 +151,87 @@ data class Address (
 )
 
 @Serializable
-data class Rating (
+data class RatingDto (
     @SerialName("Count"      ) var Count      : Int?    = null,
     @SerialName("Average"    ) var Average    : Double? = null,
     @SerialName("StarRating" ) var StarRating : Double? = null
 )
 
 @Serializable
-data class Views (
+data class ViewsDto (
     @SerialName("Target"     ) var Target     : String?               = null,
-    @SerialName("Components" ) var Components : ArrayList<Components> = arrayListOf()
+    @SerialName("Components" ) var Components : ArrayList<ComponentsDto> = arrayListOf()
 )
 
 @Serializable
-data class ViewData (
+data class ViewDataDto (
     @SerialName("Title"              ) var Title              : String?             = null,
     @SerialName("SubTitle"           ) var SubTitle           : String?             = null,
-    @SerialName("SeeAllSearchTarget" ) var SeeAllSearchTarget : SeeAllSearchTarget? = null,
+    @SerialName("SeeAllSearchTarget" ) var SeeAllSearchTarget : SeeAllSearchTargetDto? = null,
     @SerialName("SeeAllFilterId"     ) var SeeAllFilterId     : String?             = null,
     @SerialName("FocusedProperties"  ) var FocusedProperties  : ArrayList<String>   = arrayListOf(),
     @SerialName("Dishes"             ) var Dishes             : String?             = null
 )
 
 @Serializable
-data class SeeAllSearchTarget (
+data class SeeAllSearchTargetDto (
     @SerialName("CuisineFilters" ) var CuisineFilters : ArrayList<String> = arrayListOf(),
     @SerialName("SortOrder"      ) var SortOrder      : String?           = null,
     @SerialName("Refinements"    ) var Refinements    : ArrayList<String> = arrayListOf()
 )
 
 @Serializable
-data class Components (
+data class ComponentsDto (
     @SerialName("Type"         ) var Type         : String?   = null,
     @SerialName("Id"           ) var Id           : String?   = null,
     @SerialName("TrackingId"   ) var TrackingId   : String?   = null,
     @SerialName("TemplateName" ) var TemplateName : String?   = null,
-    @SerialName("ViewData"     ) var ViewData     : ViewData? = ViewData()
+    @SerialName("ViewData"     ) var ViewData     : ViewDataDto? = null
 )
 
 @Serializable
-data class CuisineSets (
+data class CuisineSetsDto (
     @SerialName("Id"       ) var Id       : String?             = null,
     @SerialName("Name"     ) var Name     : String?             = null,
     @SerialName("Type"     ) var Type     : String?             = null,
-    @SerialName("Cuisines" ) var Cuisines : ArrayList<Cuisines> = arrayListOf()
+    @SerialName("Cuisines" ) var Cuisines : ArrayList<CuisinesDto> = arrayListOf()
 )
 
 @Serializable
-data class Cuisines (
+data class CuisinesDto (
     @SerialName("Name"    ) var Name    : String? = null,
     @SerialName("SeoName" ) var SeoName : String? = null
 )
 
 @Serializable
-data class PromotedPlacement (
+data class PromotedPlacementDto (
     @SerialName("filteredSearchPromotedLimit" ) var filteredSearchPromotedLimit : Int?           = null,
     @SerialName("rankedIds"                   ) var rankedIds                   : ArrayList<Int> = arrayListOf(),
-    @SerialName("restaurants"                 ) var PromotedRestaurantsMap                 : HashMap<Int,PromotedRestaurants>?   = hashMapOf()
+    @SerialName("restaurants"                 ) var PromotedRestaurantsMap                 : HashMap<Int,PromotedRestaurantsDto>?   = hashMapOf()
 )
 
 @Serializable
-data class PromotedRestaurants(
+data class PromotedRestaurantsDto(
    @SerialName("restaurantId"    ) var restaurantId    : String?  = null,
    @SerialName("defaultPromoted" ) var defaultPromoted : Boolean? = null
 )
 
 @Serializable
-data class RestaurantSets (//todo create restaurant
+data class RestaurantSetsDto (
     @SerialName("Id"          ) var Id          : String?                = null,
     @SerialName("Name"        ) var Name        : String?                = null,
     @SerialName("Type"        ) var Type        : String?                = null,
  )
 
 @Serializable
-data class CuisineDetails (
+data class CuisineDetailsDto (
     @SerialName("Name"    ) var Name    : String? = null,
     @SerialName("SeoName" ) var SeoName : String? = null,
     @SerialName("Total"   ) var Total   : Int?    = null
 )
 
 @Serializable
-data class TagDetails (
+data class TagDetailsDto (
     @SerialName("BackgroundColour" ) var BackgroundColour : String? = null,
     @SerialName("Colour"           ) var Colour           : String? = null,
     @SerialName("DisplayName"      ) var DisplayName      : String? = null,
@@ -240,19 +240,19 @@ data class TagDetails (
 )
 
 @Serializable
-data class DeliveryFees (
-    @SerialName("restaurants" ) var restaurants : HashMap<Int,RestaurantsFee>? = null
+data class DeliveryFeesDto (
+    @SerialName("restaurants" ) var restaurants : HashMap<Int,RestaurantsFeeDto>? = null
 )
 
 @Serializable
-data class RestaurantsFee(
+data class RestaurantsFeeDto(
     @SerialName("restaurantId"      ) var restaurantId      : String?          = null,
     @SerialName("minimumOrderValue" ) var minimumOrderValue : Int?             = null,
-    @SerialName("bands"             ) var bands             : ArrayList<Bands> = arrayListOf()
+    @SerialName("bands"             ) var bands             : ArrayList<BandsDto> = arrayListOf()
 )
 
 @Serializable
-data class Bands (
+data class BandsDto (
     @SerialName("minimumAmount" ) var minimumAmount : Int? = null,
     @SerialName("fee"           ) var fee           : Int? = null
 )

@@ -1,4 +1,3 @@
 package com.zahra.model
 
-class MyClass {
-}
+data class Restauran()
