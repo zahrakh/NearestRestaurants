@@ -1,20 +1,20 @@
-package com.zahra.network
+package com.zahra.network.dto
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class RestaurantsResponseDto(
-    @SerialName("Area"              ) var Area              : String?                   = null,
+    @SerialName("Area"              ) var Area              : String?                      = null,
     @SerialName("MetaData"          ) var MetaData          : MetaDataDto?                 = null,
     @SerialName("Restaurants"       ) var Restaurants       : ArrayList<RestaurantsDto>    = arrayListOf(),
-    @SerialName("ShortResultText"   ) var ShortResultText   : String?                   = null,
+    @SerialName("ShortResultText"   ) var ShortResultText   : String?                      = null,
     @SerialName("deliveryFees"      ) var deliveryFees      : DeliveryFeesDto?             = null,
     @SerialName("promotedPlacement" ) var promotedPlacement : PromotedPlacementDto?        = null,
     @SerialName("RestaurantSets"    ) var RestaurantSets    : ArrayList<RestaurantSetsDto> = arrayListOf(),
     @SerialName("CuisineSets"       ) var CuisineSets       : ArrayList<CuisineSetsDto>    = arrayListOf(),
     @SerialName("Views"             ) var Views             : ArrayList<ViewsDto>          = arrayListOf(),
-    @SerialName("Dishes"            ) var Dishes            : ArrayList<String>         = arrayListOf()
+    @SerialName("Dishes"            ) var Dishes            : ArrayList<String>            = arrayListOf()
 )
 
 @Serializable
@@ -207,7 +207,7 @@ data class CuisinesDto (
 data class PromotedPlacementDto (
     @SerialName("filteredSearchPromotedLimit" ) var filteredSearchPromotedLimit : Int?           = null,
     @SerialName("rankedIds"                   ) var rankedIds                   : ArrayList<Int> = arrayListOf(),
-    @SerialName("restaurants"                 ) var PromotedRestaurantsMap                 : HashMap<Int,PromotedRestaurantsDto>?   = hashMapOf()
+    @SerialName("restaurants"                 ) var PromotedRestaurantsMap                 : HashMap<Int, PromotedRestaurantsDto>?   = hashMapOf()
 )
 
 @Serializable
@@ -241,7 +241,7 @@ data class TagDetailsDto (
 
 @Serializable
 data class DeliveryFeesDto (
-    @SerialName("restaurants" ) var restaurants : HashMap<Int,RestaurantsFeeDto>? = null
+    @SerialName("restaurants" ) var restaurants : HashMap<Int, RestaurantsFeeDto>? = null
 )
 
 @Serializable

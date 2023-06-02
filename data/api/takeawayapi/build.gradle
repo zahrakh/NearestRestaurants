@@ -1,10 +1,10 @@
 plugins {
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.version)
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
 }
 
 android {
-    namespace 'com.zahra.data.model'
+    namespace 'com.zahra.data.api.eatapi'
     compileSdk 33
 
     defaultConfig {
@@ -31,6 +31,11 @@ android {
 }
 
 dependencies {
+    implementation(project(":data:api"))
+    implementation(project(":data:network"))
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.ui.test.junit4)
+    debugImplementation(libs.ui.test.manifest)
 }
