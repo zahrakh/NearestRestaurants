@@ -1,10 +1,11 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.version)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
-    namespace 'com.zahra.domain'
+    namespace 'com.zahra.data'
     compileSdk 33
 
     defaultConfig {
@@ -31,8 +32,14 @@ android {
 }
 
 dependencies {
+    implementation(project(":domain"))
+
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
+    implementation(libs.kotlinx.coroutines)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.retrofit.serialization.json)
+    implementation(libs.retrofit)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)

@@ -1,4 +1,4 @@
 package com.zahra.domain.repository
 
-interface repository {
+interface TakeAwayRepository {
 }
