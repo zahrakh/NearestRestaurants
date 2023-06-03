@@ -1,4 +1,5 @@
-package com.zahra.nearestrestaurants.ui.theme
+package com.zahra.presentation.ui.theme
+
 
 import androidx.compose.ui.graphics.Color
 

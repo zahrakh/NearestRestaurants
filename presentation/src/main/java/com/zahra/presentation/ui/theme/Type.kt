@@ -1,4 +1,4 @@
-package com.zahra.nearestrestaurants.ui.theme
+package com.zahra.presentation.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

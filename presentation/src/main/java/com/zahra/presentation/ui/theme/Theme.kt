@@ -1,4 +1,4 @@
-package com.zahra.nearestrestaurants.ui.theme
+package com.zahra.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build

@@ -15,7 +15,7 @@
         android:theme="@style/Theme.NearestRestaurants"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name="com.zahra.presentation.MainActivity"
             android:exported="true"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.NearestRestaurants" >

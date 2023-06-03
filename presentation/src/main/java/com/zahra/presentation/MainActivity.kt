@@ -1,4 +1,4 @@
-package com.zahra.nearestrestaurants
+package com.zahra.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,7 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.zahra.nearestrestaurants.ui.theme.NearestRestaurantsTheme
+import com.zahra.presentation.ui.theme.NearestRestaurantsTheme
 
 
 class MainActivity : ComponentActivity() {

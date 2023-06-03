@@ -1,10 +1,8 @@
 plugins {
     alias(libs.plugins.kotlin.version)
     alias(libs.plugins.com.android.application)
-
     //
     alias(libs.plugins.kotlin.serialization)
-    id 'kotlin-parcelize'
 }
 
 android {
@@ -51,7 +49,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":data:network"))
+    implementation(project(":presentation"))
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.activity.compose)
