@@ -1,12 +1,12 @@
-package com.zahra.data.remote.takeaway
+package com.zahra.data.remote.takeawayapi
 
+import com.zahra.data.remote.ApiService
 import com.zahra.domain.data.Restaurant
-import com.zahra.network.ApiService
 
 class TakeAwayRemoteDataSourceImp(
     private val service: ApiService
 ) : TakeAwayRemoteDataSource {
-    override suspend fun getRestaurantsByPostalCode(postCode:String?): List<com.zahra.domain.data.Restaurant> = service
+    override suspend fun getRestaurantsByPostalCode(postCode: String?): List<Restaurant> = service
         .getRestaurantsByPostCode(postCode)
         .toRestaurantList()
 }
