@@ -1,18 +1,20 @@
 package com.zahra.data.di
 
+import android.content.Context
 import android.util.Log
 import com.zahra.data.BuildConfig
 import com.zahra.data.remotedata.ApiService
 import com.zahra.data.remotedata.ApiService.Companion.BASE_URL
+import com.zahra.data.remotedata.takeawayapi.StringProvider
+import com.zahra.data.remotedata.takeawayapi.StringProviderImpl
 import com.zahra.data.remotedata.takeawayapi.TakeAwayRemoteDataSource
 import com.zahra.data.remotedata.takeawayapi.TakeAwayRemoteDataSourceImp
 import com.zahra.data.repository.TakeAwayRepositoryImp
 import com.zahra.domain.repository.TakeAwayRepository
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -61,9 +63,14 @@ object NetworkModule {
     }
 
     @Provides
+    fun provideStringProvider(@ApplicationContext appContext: Context): StringProvider {
+        return StringProviderImpl(appContext)
+    }
+
+    @Provides
     @Singleton
-    fun provideTakeAwayRemoteDataSource(api: ApiService): TakeAwayRemoteDataSource {
-        return TakeAwayRemoteDataSourceImp(api)
+    fun provideTakeAwayRemoteDataSource(api: ApiService,stringProvider: StringProvider): TakeAwayRemoteDataSource {
+        return TakeAwayRemoteDataSourceImp(api,stringProvider)
     }
 
     @Provides

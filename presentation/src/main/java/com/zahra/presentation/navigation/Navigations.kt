@@ -4,7 +4,6 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.zahra.presentation.restaurantdetails.RestaurantDetailsScreen
 import com.zahra.presentation.restaurantslist.RestaurantsListScreen
 import com.zahra.presentation.splash.SplashScreen
 
@@ -32,15 +31,8 @@ fun Navigation() {
 
         composable(route = Screens.ListScreen.route) {
             RestaurantsListScreen(
-                navController = navController
             )
         }
 
-
-        composable(route = Screens.DetailsScreen.route) {
-            RestaurantDetailsScreen(
-
-            )
-        }
     }
 }

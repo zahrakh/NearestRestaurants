@@ -1,8 +1,9 @@
 package com.zahra.data.remotedata.takeawayapi
 
-import com.zahra.domain.data.Restaurant
+import com.zahra.data.remotedata.dto.RestaurantsResponseDto
+import com.zahra.domain.data.Either
 
 
 interface TakeAwayRemoteDataSource {
-    suspend fun getRestaurantsByPostalCode(postCode: String?): List<Restaurant>
+    suspend fun getRestaurantsByPostalCode(postCode: String?): Either<RestaurantsResponseDto, String>
 }

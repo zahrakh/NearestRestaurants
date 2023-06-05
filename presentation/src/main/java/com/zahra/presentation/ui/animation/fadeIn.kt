@@ -1,11 +1,11 @@
-package io.softpay.softpos.presentation.animation
+package com.zahra.presentation.ui.animation
 
 import androidx.compose.animation.*
 import androidx.compose.runtime.Composable
 
 @Composable
 @ExperimentalAnimationApi
-fun fadeInScreen(
+fun FadeInScreen(
     visible: Boolean,
     content: @Composable AnimatedVisibilityScope.() -> Unit
 ) {

@@ -4,9 +4,9 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Text
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.OutlinedButton
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.DarkGray
@@ -27,7 +27,7 @@ fun Button(
             .aspectRatio(1f)
             .padding(4.dp),
         colors = ButtonDefaults.outlinedButtonColors(
-            containerColor = DarkGray,
+            backgroundColor = DarkGray,
             contentColor = White
         ),
         shape = CircleShape,

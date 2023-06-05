@@ -1,4 +1,4 @@
-package io.softpay.softpos.presentation.animation
+package com.zahra.presentation.ui.animation
 
 import androidx.compose.animation.*
 import androidx.compose.animation.core.FastOutSlowInEasing
@@ -9,7 +9,7 @@ import androidx.compose.ui.unit.IntOffset
 
 @Composable
 @ExperimentalAnimationApi
-fun slideInScreen(
+fun SlideInScreen(
     visible: Boolean,
     content: @Composable AnimatedVisibilityScope.() -> Unit
 ) {
