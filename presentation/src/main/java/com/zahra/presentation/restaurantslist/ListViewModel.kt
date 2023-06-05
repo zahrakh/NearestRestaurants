@@ -20,22 +20,29 @@ class ListViewModel @Inject constructor(
     val state = _state.asStateFlow()
 
     init {
-        viewModelScope.launch { getRestaurantByPostCode() }
+        getRestaurantByPostCode()
     }
 
-    private suspend fun getRestaurantByPostCode(postCode: String? = DEFAULT_POST_CODE) {
-        _state.value = _state.value.copy(isLoading = true, errorMessage = null)
-        when (val result = getRestaurantsUseCase.invoke(postCode)) {
-            is Either.Success -> {
-                _state.value = _state.value.copy(restaurantList = result.data, isLoading = false)
-            }
+    private fun getRestaurantByPostCode(postCode: String? = DEFAULT_POST_CODE) =
+        viewModelScope.launch {
+            _state.value = _state.value.copy(isLoading = true, errorMessage = null)
+            when (val result = getRestaurantsUseCase.invoke(postCode)) {
+                is Either.Success -> {
+                    _state.value =
+                        _state.value.copy(restaurantList = result.data, isLoading = false)
+                }
 
-            is Either.Error -> {
-                _state.value = _state.value.copy(isLoading = false, errorMessage = result.error)
+                is Either.Error -> {
+                    _state.value = _state.value.copy(isLoading = false, errorMessage = result.error)
+                }
             }
         }
 
-
+    fun onRetry() {
+        getRestaurantByPostCode()
     }
 
 }
+
+
+

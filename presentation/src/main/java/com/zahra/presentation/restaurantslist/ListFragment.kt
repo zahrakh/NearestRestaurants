@@ -6,11 +6,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.zahra.domain.data.Restaurant
 import com.zahra.presentation.restaurantslist.screen.RestaurantListScreen
 import com.zahra.presentation.ui.theme.NearestRestaurantsTheme
 
@@ -18,19 +20,18 @@ import com.zahra.presentation.ui.theme.NearestRestaurantsTheme
 fun RestaurantsListScreen(
     modifier: Modifier = Modifier,
     viewModel: ListViewModel = hiltViewModel(),
-    onClickToDetailScreen: (Int) -> Unit = {},
+    onClickToDetailScreen: (Restaurant) -> Unit = {},
 ) {
+    val state by viewModel.state.collectAsStateWithLifecycle()
     Surface(
         modifier = modifier.fillMaxSize(),
         color = MaterialTheme.colors.background
     ) {
         RestaurantListScreen(
-            modifier = Modifier
-                .padding(
-                    horizontal = 16.dp
-                ),
-            restaurantListState = viewModel.state.collectAsStateWithLifecycle(),
+            modifier = Modifier,
+            screenState = state,
             onClickToDetailScreen = onClickToDetailScreen,
+            onRetry = { viewModel.onRetry() },
         )
     }
 }

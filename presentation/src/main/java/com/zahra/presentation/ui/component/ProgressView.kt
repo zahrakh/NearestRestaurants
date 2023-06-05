@@ -10,7 +10,6 @@ import androidx.compose.ui.unit.dp
 import com.zahra.presentation.ui.animation.FadeInScreen
 
 @Preview
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun ProgressView(visible: Boolean=true) = FadeInScreen(visible) {
     CircularProgressIndicator(
@@ -20,8 +19,8 @@ fun ProgressView(visible: Boolean=true) = FadeInScreen(visible) {
                 top = 20.dp,
                 end = 20.dp,
                 bottom = 4.dp)
-            .width(80.dp)
-            .height(80.dp)
+            .width(40.dp)
+            .height(40.dp)
 
     )
 }

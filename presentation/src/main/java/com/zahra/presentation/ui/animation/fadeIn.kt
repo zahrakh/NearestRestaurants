@@ -4,7 +4,6 @@ import androidx.compose.animation.*
 import androidx.compose.runtime.Composable
 
 @Composable
-@ExperimentalAnimationApi
 fun FadeInScreen(
     visible: Boolean,
     content: @Composable AnimatedVisibilityScope.() -> Unit
@@ -12,6 +11,6 @@ fun FadeInScreen(
     return AnimatedVisibility(
         visible = visible,
         enter = fadeIn(),
-        exit =fadeOut()
+        exit = fadeOut()
     ) { content() }
 }
