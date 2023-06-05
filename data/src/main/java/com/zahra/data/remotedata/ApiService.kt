@@ -7,12 +7,12 @@ import retrofit2.http.Path
 interface ApiService {
 
     companion object {
-        const val BASE_URL = "https://api.themoviedb.org/3/"
+        const val BASE_URL = "https://uk.api.just-eat.io/"
     }
 
-    @GET("/restaurants/bypostcode/{postCode}")
+    @GET("restaurants/bypostcode/{postCode}")
     suspend fun getRestaurantsByPostCode(
-        @Path("postCode") code: String? = "ec4m",
+        @Path("postCode") code: String?,
     ): RestaurantsResponseDto
 
 }

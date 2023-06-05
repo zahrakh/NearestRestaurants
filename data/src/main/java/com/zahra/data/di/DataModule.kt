@@ -1,6 +1,7 @@
 package com.zahra.data.di
 
 import android.util.Log
+import com.zahra.data.BuildConfig
 import com.zahra.data.remotedata.ApiService
 import com.zahra.data.remotedata.ApiService.Companion.BASE_URL
 import com.zahra.data.remotedata.takeawayapi.TakeAwayRemoteDataSource
@@ -31,11 +32,11 @@ object NetworkModule {
             Log.d("okHttpLog", message)
         }.apply {
             setLevel(
-//                if (BuildConfig.DEBUG) {
-//                    HttpLoggingInterceptor.Level.BASIC
-//                } else {
-                HttpLoggingInterceptor.Level.NONE,
-//                }
+                if (BuildConfig.DEBUG) {
+                    HttpLoggingInterceptor.Level.BASIC
+                } else {
+                    HttpLoggingInterceptor.Level.NONE
+                }
             )
         }
 
