@@ -12,16 +12,16 @@ class TakeAwayRemoteDataSourceImp(
     private var stringProvider: StringProvider
 ) : TakeAwayRemoteDataSource {
 
-    override suspend fun getRestaurantsByPostalCode(postCode: String?): Either<RestaurantsResponseDto,String> {
+    override suspend fun getRestaurantsByPostalCode(postCode: String?): Either<RestaurantsResponseDto, String> {
         return try {
             val resultDto = service.getRestaurantsByPostCode(postCode)
             Either.Success(resultDto)
         } catch (e: HttpException) {
-            Either.Error(error = e.message ?: stringProvider.getString(R.string.error_occurred))
+            Either.Error(error = stringProvider.getString(R.string.error_occurred))
         } catch (e: IOException) {
-            Either.Error(error = e.message ?: stringProvider.getString(R.string.check_internet_connection))
+            Either.Error(error = stringProvider.getString(R.string.check_internet_connection))
         } catch (e: Exception) {
-            Either.Error(error = e.message ?: stringProvider.getString(R.string.unknown_error))
+            Either.Error(error = stringProvider.getString(R.string.unknown_error))
         }
     }
 }

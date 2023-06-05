@@ -1,5 +1,6 @@
 package com.zahra.presentation.ui.component
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.OutlinedButton
@@ -8,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.DarkGray
 import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 
@@ -18,7 +20,7 @@ fun Button(
 ) {
     OutlinedButton(
         onClick = { onClick() },
-        modifier = Modifier,
+        modifier = Modifier.padding(8.dp),
         colors = ButtonDefaults.outlinedButtonColors(
             backgroundColor = DarkGray,
             contentColor = White

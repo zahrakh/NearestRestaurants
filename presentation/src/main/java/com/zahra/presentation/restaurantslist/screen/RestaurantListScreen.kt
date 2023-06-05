@@ -60,14 +60,16 @@ fun RestaurantListScreen(
 ) {
     val scaffoldState: ScaffoldState = rememberScaffoldState()
     Scaffold(
-        modifier = modifier,//todo check it
+        modifier = modifier ,
         scaffoldState = scaffoldState,
         topBar = {
             CategoriesAppBar()
         },
-    ) {
-
-        Box(modifier = modifier.padding(it.calculateTopPadding())) {
+    ) { innerPadding ->
+        Column(
+            modifier = Modifier
+                .padding(innerPadding),
+        ) {
             if (screenState.restaurantList.isNotEmpty()) {
                 RestaurantList(
                     restaurantList = screenState.restaurantList
