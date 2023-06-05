@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.version)
+    alias(libs.plugins.dagger.hilt)
+    id 'kotlin-kapt'
 }
 
 android {
@@ -33,6 +35,8 @@ android {
 dependencies {
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
+    implementation(libs.dagger.hilt)
+    kapt(libs.dagger.hilt.compiler)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)

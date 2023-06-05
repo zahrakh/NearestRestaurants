@@ -3,11 +3,14 @@ package com.zahra.presentation.restaurantslist
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zahra.domain.usecase.GetRestaurantsUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class RestaurantListViewModel(
+@HiltViewModel
+class RestaurantListViewModel @Inject constructor(
     private val getRestaurantsUseCase: GetRestaurantsUseCase
 ) : ViewModel() {
 

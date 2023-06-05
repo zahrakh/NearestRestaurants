@@ -1,15 +1,11 @@
-package com.zahra.presentation.ui.navigation
+package com.zahra.presentation.navigation
 
-import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.zahra.presentation.restaurantdetails.RestaurantDetailsScreen
+import com.zahra.presentation.restaurantslist.RestaurantsListScreen
 import com.zahra.presentation.splash.SplashScreen
 
 
@@ -25,12 +21,25 @@ fun Navigation() {
         ) {
             SplashScreen(
                 navigateToFirstPage = {
-                    navController.navigate(Screens.RestaurantListScreen.route) {
+                    navController.navigate(Screens.ListScreen.route) {
                         popUpTo(Screens.SplashScreen.route) {
                             inclusive = true
                         }
                     }
                 }
+            )
+        }
+
+        composable(route = Screens.ListScreen.route) {
+            RestaurantsListScreen(
+                navController = navController
+            )
+        }
+
+
+        composable(route = Screens.DetailsScreen.route) {
+            RestaurantDetailsScreen(
+
             )
         }
     }

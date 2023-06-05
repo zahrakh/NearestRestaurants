@@ -1,4 +1,4 @@
-package com.zahra.data.remote.dto
+package com.zahra.data.remotedata.dto
 
 import com.google.gson.annotations.SerializedName
 

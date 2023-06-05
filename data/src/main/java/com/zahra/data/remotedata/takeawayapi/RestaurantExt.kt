@@ -1,7 +1,7 @@
-package com.zahra.data.remote.takeawayapi
+package com.zahra.data.remotedata.takeawayapi
 
-import com.zahra.data.remote.dto.RestaurantsDto
-import com.zahra.data.remote.dto.RestaurantsResponseDto
+import com.zahra.data.remotedata.dto.RestaurantsDto
+import com.zahra.data.remotedata.dto.RestaurantsResponseDto
 
 internal fun RestaurantsResponseDto.toRestaurantList(): List<com.zahra.domain.data.Restaurant> {
     return this.Restaurants.map { it.mapToRestaurant() }.toMutableList()

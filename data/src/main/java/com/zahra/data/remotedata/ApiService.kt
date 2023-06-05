@@ -1,6 +1,6 @@
-package com.zahra.data.remote
+package com.zahra.data.remotedata
 
-import com.zahra.data.remote.dto.RestaurantsResponseDto
+import com.zahra.data.remotedata.dto.RestaurantsResponseDto
 import retrofit2.http.GET
 import retrofit2.http.Path
 

@@ -1,4 +1,4 @@
-package com.zahra.data.remote.takeawayapi
+package com.zahra.data.remotedata.takeawayapi
 
 import com.zahra.domain.data.Restaurant
 

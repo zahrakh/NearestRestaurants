@@ -12,6 +12,7 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_logo"
         android:supportsRtl="true"
+        android:name=".Application"
         android:theme="@style/Theme.NearestRestaurants"
         tools:targetApi="31">
         <activity

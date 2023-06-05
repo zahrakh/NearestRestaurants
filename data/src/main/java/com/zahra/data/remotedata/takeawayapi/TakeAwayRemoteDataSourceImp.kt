@@ -1,9 +1,10 @@
-package com.zahra.data.remote.takeawayapi
+package com.zahra.data.remotedata.takeawayapi
 
-import com.zahra.data.remote.ApiService
+import com.zahra.data.remotedata.ApiService
 import com.zahra.domain.data.Restaurant
+import javax.inject.Inject
 
-class TakeAwayRemoteDataSourceImp(
+class TakeAwayRemoteDataSourceImp @Inject constructor(
     private val service: ApiService
 ) : TakeAwayRemoteDataSource {
     override suspend fun getRestaurantsByPostalCode(postCode: String?): List<Restaurant> = service
