@@ -10,11 +10,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
@@ -29,7 +27,6 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -128,17 +125,14 @@ fun HomeScreenPreview() {
 fun RestaurantItemRow(
     item: Restaurant,
     onItemClicked: (clickedItem: Restaurant) -> Unit = { },
-    iconTransformationBuilder: ImageRequest.Builder.() -> Unit = { }
 ) {
-    Card(
-        shape = RoundedCornerShape(8.dp),
+    Card(shape = RoundedCornerShape(8.dp),
         backgroundColor = MaterialTheme.colors.surface,
         elevation = 2.dp,
         modifier = Modifier
             .fillMaxWidth()
             .padding(start = 16.dp, end = 16.dp, top = 16.dp)
-            .clickable { onItemClicked(item) }
-    ) {
+            .clickable { onItemClicked(item) }) {
         Box() {
             Row(
                 modifier = Modifier
@@ -148,9 +142,6 @@ fun RestaurantItemRow(
             ) {
                 // restaurant logo
                 GifImageView(
-                    modifier = Modifier
-                        .clip(shape = CircleShape)
-                        .size(56.dp),
                     url = item.logoUrl ?: "",
                 )
                 Log.i("LogoX", item.logoUrl ?: "")
@@ -175,8 +166,7 @@ fun RestaurantItemRow(
                     RatingView(
                         modifier = Modifier
                             .wrapContentSize()
-                            .height(15.dp),
-                        rating = item.rate
+                            .height(15.dp), rating = item.rate
                     )
 
                     Spacer(modifier = Modifier.height(16.dp))
