@@ -1,22 +1,23 @@
 package com.zahra.presentation.restaurantslist.screen
 
-import androidx.compose.animation.animateContentSize
-import androidx.compose.foundation.Image
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
-import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Icon
-import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.ScaffoldState
@@ -24,32 +25,28 @@ import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.compose.rememberImagePainter
+import androidx.compose.ui.unit.sp
 import coil.request.ImageRequest
 import com.zahra.domain.data.Restaurant
 import com.zahra.presentation.R
 import com.zahra.presentation.restaurantslist.ListState
 import com.zahra.presentation.ui.component.ErrorView
+import com.zahra.presentation.ui.component.GifImageView
 import com.zahra.presentation.ui.component.ProgressView
+import com.zahra.presentation.ui.component.RatingView
 import com.zahra.presentation.ui.theme.NearestRestaurantsTheme
 import com.zahra.presentation.ui.theme.OrangeColor
-import com.zahra.presentation.utils.noRippleClickable
 
 @Composable
 fun RestaurantListScreen(
@@ -60,20 +57,17 @@ fun RestaurantListScreen(
 ) {
     val scaffoldState: ScaffoldState = rememberScaffoldState()
     Scaffold(
-        modifier = modifier ,
+        modifier = modifier,
         scaffoldState = scaffoldState,
         topBar = {
-            CategoriesAppBar()
+            ScreenAppBar()
         },
     ) { innerPadding ->
         Column(
-            modifier = Modifier
-                .padding(innerPadding),
+            modifier = Modifier.padding(innerPadding),
         ) {
             if (screenState.restaurantList.isNotEmpty()) {
-                RestaurantList(
-                    restaurantList = screenState.restaurantList
-                ) { restaurantId ->
+                RestaurantList(restaurantList = screenState.restaurantList.filter { it.isOpen }) { restaurantId ->
                     onClickToDetailScreen(restaurantId)
                 }
             }
@@ -91,14 +85,14 @@ fun RestaurantListScreen(
 }
 
 @Composable
-private fun CategoriesAppBar() {
+private fun ScreenAppBar() {
     TopAppBar(
         title = { Text(stringResource(R.string.page_title)) },
         backgroundColor = MaterialTheme.colors.background,
         navigationIcon = {
             Icon(
                 imageVector = Icons.Default.Home,
-                modifier = Modifier.padding(horizontal = 12.dp),
+                modifier = Modifier.padding(horizontal = 4.dp),
                 contentDescription = "Action icon",
                 tint = OrangeColor
             )
@@ -116,18 +110,25 @@ fun RestaurantList(
         contentPadding = PaddingValues(bottom = 16.dp)
     ) {
         items(restaurantList) { item ->
-            RestaurantItemRow(item = item, itemShouldExpand = true, onItemClicked = onItemClicked)
+            RestaurantItemRow(item = item, onItemClicked = onItemClicked)
         }
     }
 }
 
 
+@Preview(showBackground = true)
+@Composable
+fun HomeScreenPreview() {
+    NearestRestaurantsTheme() {
+        RestaurantListScreen()
+    }
+}
+
 @Composable
 fun RestaurantItemRow(
     item: Restaurant,
-    itemShouldExpand: Boolean = false,
-    iconTransformationBuilder: ImageRequest.Builder.() -> Unit = { },
-    onItemClicked: (clickedItem: Restaurant) -> Unit = { }
+    onItemClicked: (clickedItem: Restaurant) -> Unit = { },
+    iconTransformationBuilder: ImageRequest.Builder.() -> Unit = { }
 ) {
     Card(
         shape = RoundedCornerShape(8.dp),
@@ -138,100 +139,65 @@ fun RestaurantItemRow(
             .padding(start = 16.dp, end = 16.dp, top = 16.dp)
             .clickable { onItemClicked(item) }
     ) {
-        var expanded by rememberSaveable { mutableStateOf(false) }
-        Row(modifier = Modifier.animateContentSize()) {
-            Box(modifier = Modifier.align(alignment = Alignment.CenterVertically)) {
-                FoodItemThumbnail(
-                    item.logoUrl ?: "",
-                    iconTransformationBuilder
-                )
-            }
-            FoodItemDetails(
-                item = item,
-                expandedLines = if (expanded) 10 else 2,
+        Box() {
+            Row(
                 modifier = Modifier
-                    .padding(
-                        start = 8.dp,
-                        end = 8.dp,
-                        top = 24.dp,
-                        bottom = 24.dp
-                    )
-                    .fillMaxWidth(0.80f)
-                    .align(Alignment.CenterVertically)
-            )
-            if (itemShouldExpand)
-                Box(
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                // restaurant logo
+                GifImageView(
                     modifier = Modifier
-                        .align(if (expanded) Alignment.Bottom else Alignment.CenterVertically)
-                        .noRippleClickable { expanded = !expanded }
+                        .clip(shape = CircleShape)
+                        .size(56.dp),
+                    url = item.logoUrl ?: "",
+                )
+                Log.i("LogoX", item.logoUrl ?: "")
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 12.dp)
                 ) {
-                    ExpandableContentIcon(expanded)
+
+                    // Text that shows the name
+                    Text(
+                        text = item.name ?: "",
+                        maxLines = 1,
+                        overflow = TextOverflow.Clip,
+                        style = TextStyle(
+                            fontSize = 14.sp, color = Color.Black
+                        )
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    // Rating view
+                    RatingView(
+                        modifier = Modifier
+                            .wrapContentSize()
+                            .height(15.dp),
+                        rating = item.rate
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    // Text that shows the food type as description
+                    Text(
+                        modifier = Modifier.padding(top = 2.dp),
+                        text = item.foodTypesName ?: "",
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        style = TextStyle(
+                            fontSize = 12.sp, color = Color.DarkGray
+                        )
+                    )
+
                 }
+            }
         }
     }
+
 }
 
-@Composable
-fun FoodItemDetails(
-    item: Restaurant?,
-    expandedLines: Int,
-    modifier: Modifier
-) {
-    Column(modifier = modifier) {
-        Text(
-            text = item?.name ?: "",
-            textAlign = TextAlign.Center,
-            style = MaterialTheme.typography.subtitle1,
-            maxLines = 2,
-            overflow = TextOverflow.Ellipsis
-        )
-        if (item?.foodTypesName?.trim()?.isNotEmpty() == true)
-            CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
-                Text(
-                    text = item.foodTypesName?.trim() ?: "",
-                    textAlign = TextAlign.Start,
-                    overflow = TextOverflow.Ellipsis,
-                    style = MaterialTheme.typography.caption,
-                    maxLines = expandedLines
-                )
-            }
-    }
-}
 
-@Composable
-private fun ExpandableContentIcon(expanded: Boolean) {
-    Icon(
-        imageVector = if (expanded)
-            Icons.Filled.KeyboardArrowUp
-        else
-            Icons.Filled.KeyboardArrowDown,
-        contentDescription = "Expand row icon",
-        modifier = Modifier
-            .padding(all = 16.dp)
-    )
-}
 
-@Composable
-fun FoodItemThumbnail(
-    thumbnailUrl: String,
-    iconTransformationBuilder: ImageRequest.Builder.() -> Unit
-) {
-    Image(
-        painter = rememberImagePainter(
-            data = thumbnailUrl,
-            builder = iconTransformationBuilder
-        ),
-        modifier = Modifier
-            .size(88.dp)
-            .padding(start = 16.dp, top = 16.dp, bottom = 16.dp),
-        contentDescription = "Food item thumbnail picture",
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun HomeScreenPreview() {
-    NearestRestaurantsTheme() {
-        RestaurantListScreen()
-    }
-}

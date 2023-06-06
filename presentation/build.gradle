@@ -53,6 +53,7 @@ dependencies {
     implementation(libs.lifecycle.viewmodel)
     implementation(libs.lifecycle.runtime.compose)
     implementation(libs.coil.compose)
+    implementation(libs.coil.gif)
     implementation(libs.dagger.hilt.compose)
     implementation(libs.dagger.hilt)
     kapt(libs.dagger.hilt.compiler)

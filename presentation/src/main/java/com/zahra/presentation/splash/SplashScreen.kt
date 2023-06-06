@@ -23,8 +23,7 @@ fun SplashScreen(
 
     var startAnimation by remember { mutableStateOf(false) }
     val alphaAnimation = animateFloatAsState(
-        targetValue = if (startAnimation) 1f else 0f,
-        animationSpec = tween(
+        targetValue = if (startAnimation) 1f else 0f, animationSpec = tween(
             durationMillis = 3000
         )
     )
@@ -41,7 +40,7 @@ fun SplashScreen(
 @Composable
 fun SplashDesign(alpha: Float) {
     Box {
-        Surface(color = White, modifier = Modifier.fillMaxSize(),) {
+        Surface(color = White, modifier = Modifier.fillMaxSize()) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
