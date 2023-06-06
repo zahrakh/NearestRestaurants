@@ -4,254 +4,254 @@ import com.google.gson.annotations.SerializedName
 
 
 data class RestaurantsResponseDto(
-    @SerializedName("Area"              ) var Area              : String?                      = null,
-    @SerializedName("MetaData"          ) var MetaData          : MetaDataDto?                 = null,
-    @SerializedName("Restaurants"       ) var Restaurants       : ArrayList<RestaurantsDto>    = arrayListOf(),
-    @SerializedName("ShortResultText"   ) var ShortResultText   : String?                      = null,
-    @SerializedName("deliveryFees"      ) var deliveryFees      : DeliveryFeesDto?             = null,
-    @SerializedName("promotedPlacement" ) var promotedPlacement : PromotedPlacementDto?        = null,
-    @SerializedName("RestaurantSets"    ) var RestaurantSets    : ArrayList<RestaurantSetsDto> = arrayListOf(),
-    @SerializedName("CuisineSets"       ) var CuisineSets       : ArrayList<CuisineSetsDto>    = arrayListOf(),
-    @SerializedName("Views"             ) var Views             : ArrayList<ViewsDto>          = arrayListOf(),
-    @SerializedName("Dishes"            ) var Dishes            : ArrayList<String>            = arrayListOf()
+    @SerializedName("Area"              ) val area              : String?                       = null,
+    @SerializedName("MetaData"          ) val metaData          : MetaDataDto?                  = null,
+    @SerializedName("Restaurants"       ) val restaurants       : List<RestaurantsDto>?         = null,
+    @SerializedName("ShortResultText"   ) val shortResultText   : String?                       = null,
+    @SerializedName("deliveryFees"      ) val deliveryFees      : DeliveryFeesDto?              = null,
+    @SerializedName("promotedPlacement" ) val promotedPlacement : PromotedPlacementDto?         = null,
+    @SerializedName("RestaurantSets"    ) val restaurantSets    : List<RestaurantSetsDto>?      = null,
+    @SerializedName("CuisineSets"       ) val cuisineSets       : List<CuisineSetsDto>?         = null,
+    @SerializedName("Views"             ) val views             : List<ViewsDto>?               = null,
+    @SerializedName("Dishes"            ) val dishes            : List<String>?                 = null
 )
 
  
 data class MetaDataDto (
-    @SerializedName("CanonicalName"                             ) var CanonicalName:String? = null,
-    @SerializedName("District"                                  ) var District:String? = null,
-    @SerializedName("Postcode"                                  ) var Postcode:String? = null,
-    @SerializedName("Area"                                      ) var Area:String? = null,
-    @SerializedName("Latitude"                                  ) var Latitude:Double?=null,
-    @SerializedName("Longitude"                                 ) var Longitude:Double?= null,
-    @SerializedName("CuisineDetails"                            ) var CuisineDetails:ArrayList<CuisineDetailsDto> = arrayListOf(),
-    @SerializedName("ResultCount"                               ) var ResultCount:Int?= null,
-    @SerializedName("SearchedTerms"                             ) var SearchedTerms:String?= null,
-    @SerializedName("TagDetails"                                ) var TagDetails: ArrayList<TagDetailsDto> = arrayListOf(),
-    @SerializedName("CollectionExperimentInjectedRestaurantIds" ) var CollectionExperimentInjectedRestaurantIds : String?                   = null,
-    @SerializedName("DeliveryArea"                              ) var DeliveryArea:String?= null
+    @SerializedName("CanonicalName"                             ) val canonicalName:String? = null,
+    @SerializedName("District"                                  ) val district:String? = null,
+    @SerializedName("Postcode"                                  ) val postcode:String? = null,
+    @SerializedName("Area"                                      ) val area:String? = null,
+    @SerializedName("Latitude"                                  ) val latitude:Double?=null,
+    @SerializedName("Longitude"                                 ) val longitude:Double?= null,
+    @SerializedName("CuisineDetails"                            ) val cuisineDetails:List<CuisineDetailsDto>? = null,
+    @SerializedName("ResultCount"                               ) val resultCount:Int?= null,
+    @SerializedName("SearchedTerms"                             ) val searchedTerms:String?= null,
+    @SerializedName("TagDetails"                                ) val tagDetails: List<TagDetailsDto>? = null,
+    @SerializedName("CollectionExperimentInjectedRestaurantIds" ) val collectionExperimentInjectedRestaurantIds : String?                   = null,
+    @SerializedName("DeliveryArea"                              ) val deliveryArea:String?= null
 )
 
  
 data class RestaurantsDto (
-    @SerializedName("Id"                          ) var Id                          : Int?                     = null,
-    @SerializedName("Name"                        ) var Name                        : String?                  = null,
-    @SerializedName("UniqueName"                  ) var UniqueName                  : String?                  = null,
-    @SerializedName("Address"                     ) var Address                     : AddressDto?                 = null,
-    @SerializedName("City"                        ) var City                        : String?                  = null,
-    @SerializedName("Postcode"                    ) var Postcode                    : String?                  = null,
-    @SerializedName("Latitude"                    ) var Latitude                    : Double?                  = null,
-    @SerializedName("Longitude"                   ) var Longitude                   : Double?                  = null,
-    @SerializedName("Rating"                      ) var Rating                      : RatingDto?                  = null,
-    @SerializedName("RatingStars"                 ) var RatingStars                 : Double?                  = null,
-    @SerializedName("NumberOfRatings"             ) var NumberOfRatings             : Int?                     = null,
-    @SerializedName("RatingAverage"               ) var RatingAverage               : Double?                  = null,
-    @SerializedName("Description"                 ) var Description                 : String?                  = null,
-    @SerializedName("Url"                         ) var Url                         : String?                  = null,
-    @SerializedName("LogoUrl"                     ) var LogoUrl                     : String?                  = null,
-    @SerializedName("IsTestRestaurant"            ) var IsTestRestaurant            : Boolean?                 = null,
-    @SerializedName("IsHalal"                     ) var IsHalal                     : Boolean?                 = null,
-    @SerializedName("IsNew"                       ) var IsNew                       : Boolean?                 = null,
-    @SerializedName("ReasonWhyTemporarilyOffline" ) var ReasonWhyTemporarilyOffline : String?                  = null,
-    @SerializedName("DriveDistance"               ) var DriveDistance               : Double?                  = null,
-    @SerializedName("DriveInfoCalculated"         ) var DriveInfoCalculated         : Boolean?                 = null,
-    @SerializedName("IsCloseBy"                   ) var IsCloseBy                   : Boolean?                 = null,
-    @SerializedName("OfferPercent"                ) var OfferPercent                : Double?                  = null,
-    @SerializedName("NewnessDate"                 ) var NewnessDate                 : String?                  = null,
-    @SerializedName("OpeningTime"                 ) var OpeningTime                 : String?                  = null,
-    @SerializedName("OpeningTimeUtc"              ) var OpeningTimeUtc              : String?                  = null,
-    @SerializedName("OpeningTimeIso"              ) var OpeningTimeIso              : String?                  = null,
-    @SerializedName("OpeningTimeLocal"            ) var OpeningTimeLocal            : String?                  = null,
-    @SerializedName("DeliveryOpeningTimeLocal"    ) var DeliveryOpeningTimeLocal    : String?                  = null,
-    @SerializedName("DeliveryOpeningTime"         ) var DeliveryOpeningTime         : String?                  = null,
-    @SerializedName("DeliveryOpeningTimeUtc"      ) var DeliveryOpeningTimeUtc      : String?                  = null,
-    @SerializedName("DeliveryStartTime"           ) var DeliveryStartTime           : String?                  = null,
-    @SerializedName("DeliveryTime"                ) var DeliveryTime                : String?                  = null,
-    @SerializedName("DeliveryTimeMinutes"         ) var DeliveryTimeMinutes         : String?                  = null,
-    @SerializedName("DeliveryWorkingTimeMinutes"  ) var DeliveryWorkingTimeMinutes  : Int?                     = null,
-    @SerializedName("DeliveryEtaMinutes"          ) var DeliveryEtaMinutes          : DeliveryEtaMinutesDto?      = null,
-    @SerializedName("IsCollection"                ) var IsCollection                : Boolean?                 = null,
-    @SerializedName("IsDelivery"                  ) var IsDelivery                  : Boolean?                 = null,
-    @SerializedName("IsFreeDelivery"              ) var IsFreeDelivery              : Boolean?                 = null,
-    @SerializedName("IsOpenNowForCollection"      ) var IsOpenNowForCollection      : Boolean?                 = null,
-    @SerializedName("IsOpenNowForDelivery"        ) var IsOpenNowForDelivery        : Boolean?                 = null,
-    @SerializedName("IsOpenNowForPreorder"        ) var IsOpenNowForPreorder        : Boolean?                 = null,
-    @SerializedName("IsOpenNow"                   ) var IsOpenNow                   : Boolean?                 = null,
-    @SerializedName("IsTemporarilyOffline"        ) var IsTemporarilyOffline        : Boolean?                 = null,
-    @SerializedName("DeliveryMenuId"              ) var DeliveryMenuId              : String?                  = null,
-    @SerializedName("CollectionMenuId"            ) var CollectionMenuId            : String?                  = null,
-    @SerializedName("DeliveryZipcode"             ) var DeliveryZipcode             : String?                  = null,
-    @SerializedName("DeliveryCost"                ) var DeliveryCost                : Double?                  = null,
-    @SerializedName("MinimumDeliveryValue"        ) var MinimumDeliveryValue        : Double?                  = null,
-    @SerializedName("SecondDateRanking"           ) var SecondDateRanking           : Double?                  = null,
-    @SerializedName("DefaultDisplayRank"          ) var DefaultDisplayRank          : Int?                     = null,
-    @SerializedName("SponsoredPosition"           ) var SponsoredPosition           : Int?                     = null,
-    @SerializedName("SecondDateRank"              ) var SecondDateRank              : Double?                  = null,
-    @SerializedName("Score"                       ) var Score                       : Double?                  = null,
-    @SerializedName("IsTemporaryBoost"            ) var IsTemporaryBoost            : Boolean?                 = null,
-    @SerializedName("IsSponsored"                 ) var IsSponsored                 : Boolean?                 = null,
-    @SerializedName("IsPremier"                   ) var IsPremier                   : Boolean?                 = null,
-    @SerializedName("HygieneRating"               ) var HygieneRating               : String?                  = null,
-    @SerializedName("ShowSmiley"                  ) var ShowSmiley                  : Boolean?                 = null,
-    @SerializedName("SmileyDate"                  ) var SmileyDate                  : String?                  = null,
-    @SerializedName("SmileyElite"                 ) var SmileyElite                 : Boolean?                 = null,
-    @SerializedName("SmileyResult"                ) var SmileyResult                : String?                  = null,
-    @SerializedName("SmileyUrl"                   ) var SmileyUrl                   : String?                  = null,
-    @SerializedName("SendsOnItsWayNotifications"  ) var SendsOnItsWayNotifications  : Boolean?                 = null,
-    @SerializedName("BrandName"                   ) var BrandName                   : String?                  = null,
-    @SerializedName("IsBrand"                     ) var IsBrand                     : Boolean?                 = null,
-    @SerializedName("LastUpdated"                 ) var LastUpdated                 : String?                  = null,
-    @SerializedName("Deals"                       ) var Deals                       : ArrayList<String>        = arrayListOf(),
-    @SerializedName("Offers"                      ) var Offers                      : ArrayList<String>        = arrayListOf(),
-    @SerializedName("Logo"                        ) var Logo                        : ArrayList<LogoDto>          = arrayListOf(),
-    @SerializedName("Tags"                        ) var Tags                        : ArrayList<String>        = arrayListOf(),
-    @SerializedName("DeliveryChargeBands"         ) var DeliveryChargeBands         : ArrayList<String>        = arrayListOf(),
-    @SerializedName("CuisineTypes"                ) var CuisineTypes                : ArrayList<CuisineTypesDto>  = arrayListOf(),
-    @SerializedName("Cuisines"                    ) var Cuisines                    : ArrayList<CuisinesDto>      = arrayListOf(),
-    @SerializedName("ScoreMetaData"               ) var ScoreMetaData               : ArrayList<ScoreMetaDataDto> = arrayListOf(),
-    @SerializedName("Badges"                      ) var Badges                      : ArrayList<String>        = arrayListOf(),
-    @SerializedName("OpeningTimes"                ) var OpeningTimes                : ArrayList<String>        = arrayListOf(),
-    @SerializedName("ServiceableAreas"            ) var ServiceableAreas            : ArrayList<String>        = arrayListOf()
+    @SerializedName("Id"                          ) val id                          : Int?                     = null,
+    @SerializedName("Name"                        ) val name                        : String?                  = null,
+    @SerializedName("UniqueName"                  ) val uniqueName                  : String?                  = null,
+    @SerializedName("Address"                     ) val address                     : AddressDto?              = null,
+    @SerializedName("City"                        ) val city                        : String?                  = null,
+    @SerializedName("Postcode"                    ) val postcode                    : String?                  = null,
+    @SerializedName("Latitude"                    ) val latitude                    : Double?                  = null,
+    @SerializedName("Longitude"                   ) val longitude                   : Double?                  = null,
+    @SerializedName("Rating"                      ) val rating                      : RatingDto?               = null,
+    @SerializedName("RatingStars"                 ) val ratingStars                 : Double?                  = null,
+    @SerializedName("NumberOfRatings"             ) val numberOfRatings             : Int?                     = null,
+    @SerializedName("RatingAverage"               ) val ratingAverage               : Double?                  = null,
+    @SerializedName("Description"                 ) val description                 : String?                  = null,
+    @SerializedName("Url"                         ) val url                         : String?                  = null,
+    @SerializedName("LogoUrl"                     ) val logoUrl                     : String?                  = null,
+    @SerializedName("IsTestRestaurant"            ) val isTestRestaurant            : Boolean?                 = null,
+    @SerializedName("IsHalal"                     ) val isHalal                     : Boolean?                 = null,
+    @SerializedName("IsNew"                       ) val isNew                       : Boolean?                 = null,
+    @SerializedName("ReasonWhyTemporarilyOffline" ) val reasonWhyTemporarilyOffline : String?                  = null,
+    @SerializedName("DriveDistance"               ) val driveDistance               : Double?                  = null,
+    @SerializedName("DriveInfoCalculated"         ) val driveInfoCalculated         : Boolean?                 = null,
+    @SerializedName("IsCloseBy"                   ) val isCloseBy                   : Boolean?                 = null,
+    @SerializedName("OfferPercent"                ) val offerPercent                : Double?                  = null,
+    @SerializedName("NewnessDate"                 ) val newnessDate                 : String?                  = null,
+    @SerializedName("OpeningTime"                 ) val openingTime                 : String?                  = null,
+    @SerializedName("OpeningTimeUtc"              ) val openingTimeUtc              : String?                  = null,
+    @SerializedName("OpeningTimeIso"              ) val openingTimeIso              : String?                  = null,
+    @SerializedName("OpeningTimeLocal"            ) val openingTimeLocal            : String?                  = null,
+    @SerializedName("DeliveryOpeningTimeLocal"    ) val deliveryOpeningTimeLocal    : String?                  = null,
+    @SerializedName("DeliveryOpeningTime"         ) val deliveryOpeningTime         : String?                  = null,
+    @SerializedName("DeliveryOpeningTimeUtc"      ) val deliveryOpeningTimeUtc      : String?                  = null,
+    @SerializedName("DeliveryStartTime"           ) val deliveryStartTime           : String?                  = null,
+    @SerializedName("DeliveryTime"                ) val deliveryTime                : String?                  = null,
+    @SerializedName("DeliveryTimeMinutes"         ) val deliveryTimeMinutes         : String?                  = null,
+    @SerializedName("DeliveryWorkingTimeMinutes"  ) val deliveryWorkingTimeMinutes  : Int?                     = null,
+    @SerializedName("DeliveryEtaMinutes"          ) val deliveryEtaMinutes          : DeliveryEtaMinutesDto?    = null,
+    @SerializedName("IsCollection"                ) val isCollection                : Boolean?                 = null,
+    @SerializedName("IsDelivery"                  ) val isDelivery                  : Boolean?                 = null,
+    @SerializedName("IsFreeDelivery"              ) val isFreeDelivery              : Boolean?                 = null,
+    @SerializedName("IsOpenNowForCollection"      ) val isOpenNowForCollection      : Boolean?                 = null,
+    @SerializedName("IsOpenNowForDelivery"        ) val isOpenNowForDelivery        : Boolean?                 = null,
+    @SerializedName("IsOpenNowForPreorder"        ) val isOpenNowForPreorder        : Boolean?                 = null,
+    @SerializedName("IsOpenNow"                   ) val isOpenNow                   : Boolean?                 = null,
+    @SerializedName("IsTemporarilyOffline"        ) val isTemporarilyOffline        : Boolean?                 = null,
+    @SerializedName("DeliveryMenuId"              ) val deliveryMenuId              : String?                  = null,
+    @SerializedName("CollectionMenuId"            ) val collectionMenuId            : String?                  = null,
+    @SerializedName("DeliveryZipcode"             ) val deliveryZipcode             : String?                  = null,
+    @SerializedName("DeliveryCost"                ) val deliveryCost                : Double?                  = null,
+    @SerializedName("MinimumDeliveryValue"        ) val minimumDeliveryValue        : Double?                  = null,
+    @SerializedName("SecondDateRanking"           ) val secondDateRanking           : Double?                  = null,
+    @SerializedName("DefaultDisplayRank"          ) val defaultDisplayRank          : Int?                     = null,
+    @SerializedName("SponsoredPosition"           ) val sponsoredPosition           : Int?                     = null,
+    @SerializedName("SecondDateRank"              ) val secondDateRank              : Double?                  = null,
+    @SerializedName("Score"                       ) val score                       : Double?                  = null,
+    @SerializedName("IsTemporaryBoost"            ) val isTemporaryBoost            : Boolean?                 = null,
+    @SerializedName("IsSponsored"                 ) val isSponsored                 : Boolean?                 = null,
+    @SerializedName("IsPremier"                   ) val isPremier                   : Boolean?                 = null,
+    @SerializedName("HygieneRating"               ) val hygieneRating               : String?                  = null,
+    @SerializedName("ShowSmiley"                  ) val showSmiley                  : Boolean?                 = null,
+    @SerializedName("SmileyDate"                  ) val smileyDate                  : String?                  = null,
+    @SerializedName("SmileyElite"                 ) val smileyElite                 : Boolean?                 = null,
+    @SerializedName("SmileyResult"                ) val smileyResult                : String?                  = null,
+    @SerializedName("SmileyUrl"                   ) val smileyUrl                   : String?                  = null,
+    @SerializedName("SendsOnItsWayNotifications"  ) val sendsOnItsWayNotifications  : Boolean?                 = null,
+    @SerializedName("BrandName"                   ) val brandName                   : String?                  = null,
+    @SerializedName("IsBrand"                     ) val isBrand                     : Boolean?                 = null,
+    @SerializedName("LastUpdated"                 ) val lastUpdated                 : String?                  = null,
+    @SerializedName("Deals"                       ) val deals                       : List<String>?             =null,
+    @SerializedName("Offers"                      ) val offers                      : List<String>?             =null,
+    @SerializedName("Logo"                        ) val logo                        : List<LogoDto>?            =null,
+    @SerializedName("Tags"                        ) val tags                        : List<String>?             =null,
+    @SerializedName("DeliveryChargeBands"         ) val deliveryChargeBands         : List<String>?             =null,
+    @SerializedName("CuisineTypes"                ) val cuisineTypes                : List<CuisineTypesDto>?    =null,
+    @SerializedName("Cuisines"                    ) val cuisines                    : List<CuisinesDto>?        =null,
+    @SerializedName("ScoreMetaData"               ) val scoreMetaData               : List<ScoreMetaDataDto>?   =null,
+    @SerializedName("Badges"                      ) val badges                      : List<String>?             =null,
+    @SerializedName("OpeningTimes"                ) val openingTimes                : List<String>?             =null,
+    @SerializedName("ServiceableAreas"            ) val serviceableAreas            : List<String>?             =null
 )
 
  
 data class DeliveryEtaMinutesDto (
-    @SerializedName("Approximate" ) var Approximate : String? = null,
-    @SerializedName("RangeLower"  ) var RangeLower  : Int?    = null,
-    @SerializedName("RangeUpper"  ) var RangeUpper  : Int?    = null
+    @SerializedName("Approximate" ) val approximate : String? = null,
+    @SerializedName("RangeLower"  ) val rangeLower  : Int?    = null,
+    @SerializedName("RangeUpper"  ) val rangeUpper  : Int?    = null
 )
 
  
 data class ScoreMetaDataDto (
-    @SerializedName("Key"   ) var Key   : String? = null,
-    @SerializedName("Value" ) var Value : String? = null
+    @SerializedName("Key"   ) val key   : String? = null,
+    @SerializedName("Value" ) val value : String? = null
 )
 
  
 data class LogoDto (
-    @SerializedName("StandardResolutionURL" ) var StandardResolutionURL : String? = null
+    @SerializedName("StandardResolutionURL" ) val standardResolutionURL : String? = null
 )
 
  
 data class CuisineTypesDto(
-    @SerializedName("Id"           ) var Id           : Int?     = null,
-    @SerializedName("IsTopCuisine" ) var IsTopCuisine : Boolean? = null,
-    @SerializedName("Name"         ) var Name         : String?  = null,
-    @SerializedName("SeoName"      ) var SeoName      : String?  = null
+    @SerializedName("Id"           ) val id           : Int?     = null,
+    @SerializedName("IsTopCuisine" ) val isTopCuisine : Boolean? = null,
+    @SerializedName("Name"         ) val name         : String?  = null,
+    @SerializedName("SeoName"      ) val seoName      : String?  = null
 )
 
  
 data class AddressDto (
-    @SerializedName("City"      ) var City      : String? = null,
-    @SerializedName("FirstLine" ) var FirstLine : String? = null,
-    @SerializedName("Postcode"  ) var Postcode  : String? = null,
-    @SerializedName("Latitude"  ) var Latitude  : Double? = null,
-    @SerializedName("Longitude" ) var Longitude : Double? = null
+    @SerializedName("City"      ) val city      : String? = null,
+    @SerializedName("FirstLine" ) val firstLine : String? = null,
+    @SerializedName("Postcode"  ) val postcode  : String? = null,
+    @SerializedName("Latitude"  ) val latitude  : Double? = null,
+    @SerializedName("Longitude" ) val longitude : Double? = null
 )
 
  
 data class RatingDto (
-    @SerializedName("Count"      ) var Count      : Int?    = null,
-    @SerializedName("Average"    ) var Average    : Double? = null,
-    @SerializedName("StarRating" ) var StarRating : Double? = null
+    @SerializedName("Count"      ) val count      : Int?    = null,
+    @SerializedName("Average"    ) val average    : Double? = null,
+    @SerializedName("StarRating" ) val starRating : Double? = null
 )
 
  
 data class ViewsDto (
-    @SerializedName("Target"     ) var Target     : String?               = null,
-    @SerializedName("Components" ) var Components : ArrayList<ComponentsDto> = arrayListOf()
+    @SerializedName("Target"     ) val target     : String?               = null,
+    @SerializedName("Components" ) val components : List<ComponentsDto>? = null
 )
 
  
 data class ViewDataDto (
-    @SerializedName("Title"              ) var Title              : String?             = null,
-    @SerializedName("SubTitle"           ) var SubTitle           : String?             = null,
-    @SerializedName("SeeAllSearchTarget" ) var SeeAllSearchTarget : SeeAllSearchTargetDto? = null,
-    @SerializedName("SeeAllFilterId"     ) var SeeAllFilterId     : String?             = null,
-    @SerializedName("FocusedProperties"  ) var FocusedProperties  : ArrayList<String>   = arrayListOf(),
-    @SerializedName("Dishes"             ) var Dishes             : String?             = null
+    @SerializedName("Title"              ) val title              : String?             = null,
+    @SerializedName("SubTitle"           ) val subTitle           : String?             = null,
+    @SerializedName("SeeAllSearchTarget" ) val seeAllSearchTarget : SeeAllSearchTargetDto? = null,
+    @SerializedName("SeeAllFilterId"     ) val seeAllFilterId     : String?             = null,
+    @SerializedName("FocusedProperties"  ) val focusedProperties  : List<String>?       = null,
+    @SerializedName("Dishes"             ) val dishes             : String?             = null
 )
 
  
 data class SeeAllSearchTargetDto (
-    @SerializedName("CuisineFilters" ) var CuisineFilters : ArrayList<String> = arrayListOf(),
-    @SerializedName("SortOrder"      ) var SortOrder      : String?           = null,
-    @SerializedName("Refinements"    ) var Refinements    : ArrayList<String> = arrayListOf()
+    @SerializedName("CuisineFilters" ) val cuisineFilters : List<String>? = null,
+    @SerializedName("SortOrder"      ) val sortOrder      : String?           = null,
+    @SerializedName("Refinements"    ) val refinements    : List<String>? = null
 )
 
  
 data class ComponentsDto (
-    @SerializedName("Type"         ) var Type         : String?   = null,
-    @SerializedName("Id"           ) var Id           : String?   = null,
-    @SerializedName("TrackingId"   ) var TrackingId   : String?   = null,
-    @SerializedName("TemplateName" ) var TemplateName : String?   = null,
-    @SerializedName("ViewData"     ) var ViewData     : ViewDataDto? = null
+    @SerializedName("Type"         ) val type         : String?   = null,
+    @SerializedName("Id"           ) val id           : String?   = null,
+    @SerializedName("TrackingId"   ) val trackingId   : String?   = null,
+    @SerializedName("TemplateName" ) val templateName : String?   = null,
+    @SerializedName("ViewData"     ) val viewData     : ViewDataDto? = null
 )
 
  
 data class CuisineSetsDto (
-    @SerializedName("Id"       ) var Id       : String?             = null,
-    @SerializedName("Name"     ) var Name     : String?             = null,
-    @SerializedName("Type"     ) var Type     : String?             = null,
-    @SerializedName("Cuisines" ) var Cuisines : ArrayList<CuisinesDto> = arrayListOf()
+    @SerializedName("Id"       ) val Id       : String?             = null,
+    @SerializedName("Name"     ) val Name     : String?             = null,
+    @SerializedName("Type"     ) val Type     : String?             = null,
+    @SerializedName("Cuisines" ) val Cuisines : List<CuisinesDto>?  = null
 )
 
  
 data class CuisinesDto (
-    @SerializedName("Name"    ) var Name    : String? = null,
-    @SerializedName("SeoName" ) var SeoName : String? = null
+    @SerializedName("Name"    ) val Name    : String? = null,
+    @SerializedName("SeoName" ) val SeoName : String? = null
 )
 
  
 data class PromotedPlacementDto (
-    @SerializedName("filteredSearchPromotedLimit" ) var filteredSearchPromotedLimit : Int?           = null,
-    @SerializedName("rankedIds"                   ) var rankedIds                   : ArrayList<Int> = arrayListOf(),
-    @SerializedName("restaurants"                 ) var PromotedRestaurantsMap                 : HashMap<Int, PromotedRestaurantsDto>?   = hashMapOf()
+    @SerializedName("filteredSearchPromotedLimit" ) val filteredSearchPromotedLimit : Int?        = null,
+    @SerializedName("rankedIds"                   ) val rankedIds                   : List<Int>?  = null,
+    @SerializedName("restaurants"                 ) val PromotedRestaurantsMap                 : HashMap<Int, PromotedRestaurantsDto>?   = hashMapOf()
 )
 
  
 data class PromotedRestaurantsDto(
-   @SerializedName("restaurantId"    ) var restaurantId    : String?  = null,
-   @SerializedName("defaultPromoted" ) var defaultPromoted : Boolean? = null
+   @SerializedName("restaurantId"    ) val restaurantId    : String?  = null,
+   @SerializedName("defaultPromoted" ) val defaultPromoted : Boolean? = null
 )
 
  
 data class RestaurantSetsDto (
-    @SerializedName("Id"          ) var Id          : String?                = null,
-    @SerializedName("Name"        ) var Name        : String?                = null,
-    @SerializedName("Type"        ) var Type        : String?                = null,
+    @SerializedName("Id"          ) val id          : String?                = null,
+    @SerializedName("Name"        ) val name        : String?                = null,
+    @SerializedName("Type"        ) val type        : String?                = null,
  )
 
  
 data class CuisineDetailsDto (
-    @SerializedName("Name"    ) var Name    : String? = null,
-    @SerializedName("SeoName" ) var SeoName : String? = null,
-    @SerializedName("Total"   ) var Total   : Int?    = null
+    @SerializedName("Name"    ) val name    : String? = null,
+    @SerializedName("SeoName" ) val seoName : String? = null,
+    @SerializedName("Total"   ) val total   : Int?    = null
 )
 
  
 data class TagDetailsDto (
-    @SerializedName("BackgroundColour" ) var BackgroundColour : String? = null,
-    @SerializedName("Colour"           ) var Colour           : String? = null,
-    @SerializedName("DisplayName"      ) var DisplayName      : String? = null,
-    @SerializedName("Key"              ) var Key              : String? = null,
-    @SerializedName("Priority"         ) var Priority         : Int?    = null
+    @SerializedName("BackgroundColour" ) val backgroundColour : String? = null,
+    @SerializedName("Colour"           ) val colour           : String? = null,
+    @SerializedName("DisplayName"      ) val displayName      : String? = null,
+    @SerializedName("Key"              ) val key              : String? = null,
+    @SerializedName("Priority"         ) val priority         : Int?    = null
 )
 
  
 data class DeliveryFeesDto (
-    @SerializedName("restaurants" ) var restaurants : HashMap<Int, RestaurantsFeeDto>? = null
+    @SerializedName("restaurants" ) val restaurants : HashMap<Int, RestaurantsFeeDto>? = null
 )
 
  
 data class RestaurantsFeeDto(
-    @SerializedName("restaurantId"      ) var restaurantId      : String?          = null,
-    @SerializedName("minimumOrderValue" ) var minimumOrderValue : Int?             = null,
-    @SerializedName("bands"             ) var bands             : ArrayList<BandsDto> = arrayListOf()
+    @SerializedName("restaurantId"      ) val restaurantId      : String?          = null,
+    @SerializedName("minimumOrderValue" ) val minimumOrderValue : Int?             = null,
+    @SerializedName("bands"             ) val bands             : List<BandsDto>?  = null
 )
 
  
 data class BandsDto (
-    @SerializedName("minimumAmount" ) var minimumAmount : Int? = null,
-    @SerializedName("fee"           ) var fee           : Int? = null
+    @SerializedName("minimumAmount" ) val minimumAmount : Int? = null,
+    @SerializedName("fee"           ) val fee           : Int? = null
 )

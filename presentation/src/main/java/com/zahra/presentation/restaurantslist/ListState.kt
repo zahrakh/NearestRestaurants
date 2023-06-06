@@ -5,5 +5,5 @@ import com.zahra.domain.data.Restaurant
 data class ListState(
     val isLoading: Boolean = false,
     val errorMessage: String? = null,
-    val restaurantList: List<Restaurant> = arrayListOf()
+    val restaurantList: List<Restaurant>? = null
 )

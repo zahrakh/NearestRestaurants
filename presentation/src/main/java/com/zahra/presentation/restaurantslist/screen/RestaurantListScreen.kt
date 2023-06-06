@@ -1,6 +1,5 @@
 package com.zahra.presentation.restaurantslist.screen
 
-import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -34,7 +33,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.request.ImageRequest
 import com.zahra.domain.data.Restaurant
 import com.zahra.presentation.R
 import com.zahra.presentation.restaurantslist.ListState
@@ -63,7 +61,7 @@ fun RestaurantListScreen(
         Column(
             modifier = Modifier.padding(innerPadding),
         ) {
-            if (screenState.restaurantList.isNotEmpty()) {
+            if (!screenState.restaurantList.isNullOrEmpty()) {
                 RestaurantList(restaurantList = screenState.restaurantList.filter { it.isOpen }) { restaurantId ->
                     onClickToDetailScreen(restaurantId)
                 }
@@ -144,7 +142,6 @@ fun RestaurantItemRow(
                 GifImageView(
                     url = item.logoUrl ?: "",
                 )
-                Log.i("LogoX", item.logoUrl ?: "")
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -157,16 +154,17 @@ fun RestaurantItemRow(
                         maxLines = 1,
                         overflow = TextOverflow.Clip,
                         style = TextStyle(
-                            fontSize = 14.sp, color = Color.Black
+                            fontSize = 16.sp, color = Color.Black
                         )
                     )
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(8.dp))
 
                     // Rating view
                     RatingView(
                         modifier = Modifier
                             .wrapContentSize()
-                            .height(15.dp), rating = item.rate
+                            .height(15.dp),
+                        rating = item.rate ?: 0.0f
                     )
 
                     Spacer(modifier = Modifier.height(16.dp))
@@ -174,11 +172,12 @@ fun RestaurantItemRow(
                     // Text that shows the food type as description
                     Text(
                         modifier = Modifier.padding(top = 2.dp),
-                        text = item.foodTypesName ?: "",
-                        maxLines = 1,
+                        text = item.cuisineTypesDescription(),
+                        maxLines = 5,
                         overflow = TextOverflow.Ellipsis,
                         style = TextStyle(
-                            fontSize = 12.sp, color = Color.DarkGray
+                            fontSize = 14.sp,
+                            color = Color.Gray
                         )
                     )
 

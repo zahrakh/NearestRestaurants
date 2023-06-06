@@ -22,8 +22,8 @@ import kotlin.math.sin
 
 @Composable
 fun RatingView(
-    rating: Float,
     modifier: Modifier = Modifier,
+    rating: Float=0.0f,
     color: Color = OrangeColor
 ) {
     Row(modifier = modifier.wrapContentSize()) {
@@ -115,8 +115,8 @@ fun RatingBarPreview() {
         Modifier.fillMaxSize().background(Color.White)
     ) {
         RatingView(
-            3.8f,
-            modifier = Modifier.height(20.dp)
+            modifier = Modifier.height(20.dp),
+            3.8f
         )
     }
 }
