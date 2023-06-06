@@ -1,5 +1,6 @@
 package com.zahra.presentation.restaurantslist.screen
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -21,7 +22,7 @@ import androidx.compose.material.ScaffoldState
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -40,8 +41,8 @@ import com.zahra.presentation.ui.component.ErrorView
 import com.zahra.presentation.ui.component.GifImageView
 import com.zahra.presentation.ui.component.ProgressView
 import com.zahra.presentation.ui.component.RatingView
+import com.zahra.presentation.ui.shape.TextFieldBackground
 import com.zahra.presentation.ui.theme.NearestRestaurantsTheme
-import com.zahra.presentation.ui.theme.OrangeColor
 
 @Composable
 fun RestaurantListScreen(
@@ -61,6 +62,7 @@ fun RestaurantListScreen(
         Column(
             modifier = Modifier.padding(innerPadding),
         ) {
+            LocationPinScreen(screenState.currentPostCode)
             if (!screenState.restaurantList.isNullOrEmpty()) {
                 RestaurantList(restaurantList = screenState.restaurantList.filter { it.isOpen }) { restaurantId ->
                     onClickToDetailScreen(restaurantId)
@@ -75,8 +77,6 @@ fun RestaurantListScreen(
             )
         }
     }
-
-
 }
 
 @Composable
@@ -84,15 +84,40 @@ private fun ScreenAppBar() {
     TopAppBar(
         title = { Text(stringResource(R.string.page_title)) },
         backgroundColor = MaterialTheme.colors.background,
-        navigationIcon = {
-            Icon(
-                imageVector = Icons.Default.Home,
-                modifier = Modifier.padding(horizontal = 4.dp),
-                contentDescription = "Action icon",
-                tint = OrangeColor
-            )
-        },
     )
+}
+
+@Composable
+fun LocationPinScreen(
+    locationPostCode: String
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp)
+            .height(40.dp)
+            .clickable {
+
+            }
+            .border(
+                width = 1.dp, brush = TextFieldBackground, shape = RoundedCornerShape(4.dp)
+            ),
+        verticalAlignment = Alignment.CenterVertically,
+
+    ) {
+        Icon(
+            imageVector = Icons.Default.ArrowDropDown,
+            modifier = Modifier.padding(horizontal = 4.dp),
+            contentDescription = stringResource(id = R.string.find_location),
+            tint = Color.Gray
+        )
+        Text(
+            text = stringResource(
+                id = R.string.find_location, locationPostCode
+            ), color = Color.Gray
+        )
+    }
+
 }
 
 
@@ -110,15 +135,6 @@ fun RestaurantList(
     }
 }
 
-
-@Preview(showBackground = true)
-@Composable
-fun HomeScreenPreview() {
-    NearestRestaurantsTheme() {
-        RestaurantListScreen()
-    }
-}
-
 @Composable
 fun RestaurantItemRow(
     item: Restaurant,
@@ -129,7 +145,7 @@ fun RestaurantItemRow(
         elevation = 2.dp,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(start = 16.dp, end = 16.dp, top = 16.dp)
+            .padding(start = 8.dp, end = 8.dp, top = 8.dp)
             .clickable { onItemClicked(item) }) {
         Box() {
             Row(
@@ -176,8 +192,7 @@ fun RestaurantItemRow(
                         maxLines = 5,
                         overflow = TextOverflow.Ellipsis,
                         style = TextStyle(
-                            fontSize = 14.sp,
-                            color = Color.Gray
+                            fontSize = 14.sp, color = Color.Gray
                         )
                     )
 
@@ -186,6 +201,15 @@ fun RestaurantItemRow(
         }
     }
 
+}
+
+
+@Preview(showBackground = true)
+@Composable
+fun HomeScreenPreview() {
+    NearestRestaurantsTheme() {
+        RestaurantListScreen()
+    }
 }
 
 

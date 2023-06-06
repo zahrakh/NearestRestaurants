@@ -3,5 +3,6 @@
     <string name="desc_logo">Application Logo</string>
     <string name="page_title">Just Eat Take Away</string>
     <string name="retry">Retry</string>
-    <string name="type_of_food">Type Of Food:\n  %s</string>
+    <string name="input_view_icon">Icon</string>
+    <string name="find_location">Location: %s</string>
 </resources>
