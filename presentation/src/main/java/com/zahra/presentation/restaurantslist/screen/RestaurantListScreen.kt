@@ -1,6 +1,5 @@
 package com.zahra.presentation.restaurantslist.screen
 
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,33 +14,21 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
-import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.ScaffoldState
 import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.zahra.domain.data.Restaurant
-import com.zahra.presentation.R
 import com.zahra.presentation.restaurantslist.ListState
-import com.zahra.presentation.ui.component.ErrorView
 import com.zahra.presentation.ui.component.GifImageView
-import com.zahra.presentation.ui.component.ProgressView
 import com.zahra.presentation.ui.component.RatingView
-import com.zahra.presentation.ui.shape.TextFieldBackground
 import com.zahra.presentation.ui.theme.NearestRestaurantsTheme
 
 @Composable
@@ -49,75 +36,16 @@ fun RestaurantListScreen(
     modifier: Modifier = Modifier,
     screenState: ListState = ListState(),
     onClickToDetailScreen: (Restaurant) -> Unit = {},
-    onRetry: () -> Unit = {},
 ) {
-    val scaffoldState: ScaffoldState = rememberScaffoldState()
-    Scaffold(
-        modifier = modifier,
-        scaffoldState = scaffoldState,
-        topBar = {
-            ScreenAppBar()
-        },
-    ) { innerPadding ->
-        Column(
-            modifier = Modifier.padding(innerPadding),
-        ) {
-            LocationPinScreen(screenState.currentPostCode)
-            if (!screenState.restaurantList.isNullOrEmpty()) {
-                RestaurantList(restaurantList = screenState.restaurantList.filter { it.isOpen }) { restaurantId ->
-                    onClickToDetailScreen(restaurantId)
-                }
+    Column(
+        modifier = modifier.fillMaxWidth(),
+    ) {
+        if (!screenState.restaurantList.isNullOrEmpty()) {
+            RestaurantList(restaurantList = screenState.restaurantList.filter { it.isOpen }) { restaurantId ->
+                onClickToDetailScreen(restaurantId)
             }
-
-            ProgressView(screenState.isLoading)
-            ErrorView(
-                errorMessage = screenState.errorMessage ?: "",
-                ocClick = onRetry,
-                visible = screenState.errorMessage != null,
-            )
         }
     }
-}
-
-@Composable
-private fun ScreenAppBar() {
-    TopAppBar(
-        title = { Text(stringResource(R.string.page_title)) },
-        backgroundColor = MaterialTheme.colors.background,
-    )
-}
-
-@Composable
-fun LocationPinScreen(
-    locationPostCode: String
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp)
-            .height(40.dp)
-            .clickable {
-
-            }
-            .border(
-                width = 1.dp, brush = TextFieldBackground, shape = RoundedCornerShape(4.dp)
-            ),
-        verticalAlignment = Alignment.CenterVertically,
-
-    ) {
-        Icon(
-            imageVector = Icons.Default.ArrowDropDown,
-            modifier = Modifier.padding(horizontal = 4.dp),
-            contentDescription = stringResource(id = R.string.find_location),
-            tint = Color.Gray
-        )
-        Text(
-            text = stringResource(
-                id = R.string.find_location, locationPostCode
-            ), color = Color.Gray
-        )
-    }
-
 }
 
 
@@ -145,7 +73,7 @@ fun RestaurantItemRow(
         elevation = 2.dp,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(start = 8.dp, end = 8.dp, top = 8.dp)
+            .padding(start = 16.dp, end = 16.dp, top = 8.dp)
             .clickable { onItemClicked(item) }) {
         Box() {
             Row(
