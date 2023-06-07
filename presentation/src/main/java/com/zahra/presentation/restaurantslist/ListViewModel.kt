@@ -55,18 +55,23 @@ class ListViewModel @Inject constructor(
         }
     }
 
-    fun getRestaurantByLocation(lat: Double? = 0.0, lon: Double? = 0.0) {
+    private fun getRestaurantByLocation(lat: Double? = 0.0, lon: Double? = 0.0) {
         job?.cancel()
         job = viewModelScope.launch(Dispatchers.IO) {
             _state.value = _state.value.copy(isLoading = true, errorMessage = null)
             when (val result = getByLocationUseCase.invoke(lat, lon)) {
                 is Either.Success -> {
-                    _state.value =
-                        _state.value.copy(restaurantList = result.data, isLoading = false)
+                    _state.value = _state.value.copy(
+                        restaurantList = result.data,
+                        isLoading = false
+                    )
                 }
 
                 is Either.Error -> {
-                    _state.value = _state.value.copy(isLoading = false, errorMessage = result.error)
+                    _state.value = _state.value.copy(
+                        isLoading = false,
+                        errorMessage = result.error
+                    )
                 }
             }
         }
