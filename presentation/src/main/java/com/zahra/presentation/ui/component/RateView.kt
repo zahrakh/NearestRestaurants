@@ -3,7 +3,15 @@ package com.zahra.presentation.ui.component
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.GenericShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -23,7 +31,7 @@ import kotlin.math.sin
 @Composable
 fun RatingView(
     modifier: Modifier = Modifier,
-    rating: Float=0.0f,
+    rating: Float = 0.0f,
     color: Color = OrangeColor
 ) {
     Row(modifier = modifier.wrapContentSize()) {
@@ -37,7 +45,6 @@ fun RatingView(
         }
     }
 }
-
 
 
 @Composable
@@ -112,7 +119,9 @@ private val starPath = { size: Float ->
 @Composable
 fun RatingBarPreview() {
     Column(
-        Modifier.fillMaxSize().background(Color.White)
+        Modifier
+            .fillMaxSize()
+            .background(Color.White)
     ) {
         RatingView(
             modifier = Modifier.height(20.dp),

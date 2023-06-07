@@ -6,4 +6,5 @@ import com.zahra.domain.data.Either
 
 interface TakeAwayRemoteDataSource {
     suspend fun getRestaurantsByPostalCode(postCode: String?): Either<RestaurantsResponseDto, String>
+    suspend fun getRestaurantsByLocation(lat:Double?,lon:Double?): Either<RestaurantsResponseDto, String>
 }

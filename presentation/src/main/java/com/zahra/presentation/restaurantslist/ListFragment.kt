@@ -26,6 +26,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -49,7 +50,7 @@ fun RestaurantsListScreen(
 ) {
     val screenState by viewModel.state.collectAsStateWithLifecycle()
     val scaffoldState: ScaffoldState = rememberScaffoldState()
-
+    val context = LocalContext.current
 
     Surface(
         modifier = modifier.fillMaxSize(), color = MaterialTheme.colors.background
@@ -88,7 +89,7 @@ fun RestaurantsListScreen(
                         viewModel.showGoneDialogLocation(it)
                     },
                     searchByGPS = {
-                            
+                            viewModel.searchByGPS(context)
                     }) {
                     viewModel.getRestaurantByPostCode(it)
                 }

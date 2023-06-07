@@ -55,7 +55,6 @@ fun ErrorView(
             }
             Row {
                 Button(
-
                     text = stringResource(id = R.string.retry),
                     onClick = ocClick,
                 )

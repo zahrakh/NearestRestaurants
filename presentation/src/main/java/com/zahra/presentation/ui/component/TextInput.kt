@@ -1,7 +1,11 @@
 package com.zahra.presentation.ui.component
 
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.OutlinedTextField
@@ -19,13 +23,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.zahra.presentation.R
 import com.zahra.presentation.ui.animation.FadeInScreen
 import com.zahra.presentation.ui.shape.TextFieldBackground
-import com.zahra.presentation.R
 
 @Preview
 @Composable
-fun TextFieldWithIcons(hint: String?=null, visible: Boolean = true) = FadeInScreen(visible) {
+fun TextFieldWithIcons(hint: String? = null, visible: Boolean = true) = FadeInScreen(visible) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -44,7 +48,7 @@ fun TextFieldWithIcons(hint: String?=null, visible: Boolean = true) = FadeInScre
         ) {
 
             Text(
-                text = hint?:"",
+                text = hint ?: "",
                 fontSize = 16.sp,
                 color = Color.White,
                 fontFamily = FontFamily.SansSerif
@@ -66,12 +70,12 @@ fun TextFieldWithIcons(hint: String?=null, visible: Boolean = true) = FadeInScre
                     Icon(
                         tint = Color.White,
                         imageVector = Icons.Default.ShoppingCart,
-                        contentDescription = stringResource(id =R.string.input_view_icon)
+                        contentDescription = stringResource(id = R.string.input_view_icon)
                     )
                 },
                 onValueChange = {},
                 shape = RoundedCornerShape(12.dp),
-             )
+            )
         }
     }
 

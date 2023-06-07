@@ -2,7 +2,6 @@ package com.zahra.presentation.restaurantslist.screen
 
 
 import android.Manifest
-import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -33,7 +32,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -61,21 +59,16 @@ fun LocationDialogScreen(
 
     val multiplePermissionState = rememberMultiplePermissionsState(
         permissions = listOf(
-            Manifest.permission.ACCESS_COARSE_LOCATION,
-            Manifest.permission.ACCESS_FINE_LOCATION
+            Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION
         )
     )
 
-    PermissionsRequired(
-        multiplePermissionsState = multiplePermissionState,
+    PermissionsRequired(multiplePermissionsState = multiplePermissionState,
         permissionsNotGrantedContent = {
-             Toast.makeText(LocalContext.current, stringResource(id = R.string.insert_post_code_manually),Toast.LENGTH_LONG).show()
         },
         permissionsNotAvailableContent = {
-
-        }
-    ) {
-         searchByGPS(true)
+        }) {
+        searchByGPS(true)
     }
 
     Dialog(onDismissRequest = { setShowDialog(false) }) {
@@ -158,8 +151,7 @@ fun LocationDialogScreen(
 
                             ) {
                                 Text(
-                                    text = stringResource(id = R.string.confirm),
-                                    style = TextStyle(
+                                    text = stringResource(id = R.string.confirm), style = TextStyle(
                                         fontSize = 14.sp,
                                     )
                                 )

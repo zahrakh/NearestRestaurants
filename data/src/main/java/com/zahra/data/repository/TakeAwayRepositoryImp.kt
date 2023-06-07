@@ -10,12 +10,28 @@ import javax.inject.Inject
 class TakeAwayRepositoryImp @Inject constructor(
     private val takeAwayRemoteDataSource: TakeAwayRemoteDataSource
 ) : TakeAwayRepository {
-    override suspend fun getRestaurantListByPostCode(postCode: String?): Either<List<Restaurant>?, String> {
+    override suspend fun getRestaurantListByPostCode(
+        postCode: String?
+    ): Either<List<Restaurant>?, String> {
         return when (val result = takeAwayRemoteDataSource.getRestaurantsByPostalCode(postCode)) {
             is Either.Success -> {
                 Either.Success(result.data.toRestaurantList())
             }
+            is Either.Error -> {
+                Either.Error(result.error)
+            }
+        }
+    }
 
+    override suspend fun getRestaurantListByLocation(
+        lat: Double?, lon: Double?
+    ): Either<List<Restaurant>?, String> {
+        return when (val result = takeAwayRemoteDataSource.getRestaurantsByLocation(
+            lat, lon
+        )) {
+            is Either.Success -> {
+                Either.Success(result.data.toRestaurantList())
+            }
             is Either.Error -> {
                 Either.Error(result.error)
             }

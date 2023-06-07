@@ -15,6 +15,12 @@ interface ApiService {
         @Path("postCode") code: String?,
     ): RestaurantsResponseDto
 
+    @GET("restaurants/bylatlong?latitude={lat}&longitude={lon}")
+    suspend fun getRestaurantsByLocation(
+        @Path("lat") lat: Double?,
+        @Path("lon") lon: Double?,
+    ): RestaurantsResponseDto
+
 }
 
 
