@@ -57,7 +57,7 @@ dependencies {
     implementation(libs.permision)
     implementation(libs.dagger.hilt.compose)
     implementation(libs.dagger.hilt)
-    implementation 'com.google.android.gms:play-services-location:21.0.1'
+    implementation(libs.google.service.location)
     kapt(libs.dagger.hilt.compiler)
 
     testImplementation(libs.junit)
