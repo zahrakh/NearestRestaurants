@@ -6,6 +6,8 @@ import com.zahra.domain.data.Either
 import com.zahra.domain.usecase.GetRestaurantsUseCase
 import com.zahra.presentation.utils.DEFAULT_POST_CODE
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -19,12 +21,16 @@ class ListViewModel @Inject constructor(
     private val _state: MutableStateFlow<ListState> = MutableStateFlow(ListState())
     val state = _state.asStateFlow()
 
+    var job: Job? = null
+
     init {
         getRestaurantByPostCode()
     }
 
-    private fun getRestaurantByPostCode(postCode: String? = DEFAULT_POST_CODE) =
-        viewModelScope.launch {
+    fun getRestaurantByPostCode(postCode: String? = DEFAULT_POST_CODE) {
+        job?.cancel()
+        job = viewModelScope.launch(Dispatchers.IO) {
+            _state.value = _state.value.copy(currentPostCode = postCode ?: DEFAULT_POST_CODE)
             _state.value = _state.value.copy(isLoading = true, errorMessage = null)
             when (val result = getRestaurantsUseCase.invoke(postCode)) {
                 is Either.Success -> {
@@ -37,9 +43,18 @@ class ListViewModel @Inject constructor(
                 }
             }
         }
+    }
 
     fun onRetry() {
         getRestaurantByPostCode()
+    }
+
+    fun showGoneDialogLocation(show: Boolean = false) {
+        _state.value = _state.value.copy(showDialogLocation = show)
+    }
+
+    fun searchViaGPS() {
+
     }
 
 }

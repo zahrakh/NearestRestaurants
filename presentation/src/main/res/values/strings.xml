@@ -5,5 +5,10 @@
     <string name="retry">Retry</string>
     <string name="input_view_icon">Icon</string>
     <string name="find_location">Location: %s</string>
+    <string name="location_dialog_title">enter post code or select gps</string>
+    <string name="post_code">enter postcode like: ec4m</string>
     <string name="icon_image">Icon</string>
+    <string name="empty_field_warning">Field can not be empty</string>
+    <string name="confirm">Confirm</string>
+    <string name="search_by_gps">Search By GPS</string>
 </resources>

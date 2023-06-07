@@ -33,6 +33,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.zahra.domain.data.Restaurant
 import com.zahra.presentation.R
+import com.zahra.presentation.restaurantslist.screen.LocationDialogScreen
 import com.zahra.presentation.restaurantslist.screen.RestaurantListScreen
 import com.zahra.presentation.ui.component.ErrorView
 import com.zahra.presentation.ui.component.ProgressView
@@ -49,6 +50,7 @@ fun RestaurantsListScreen(
     val screenState by viewModel.state.collectAsStateWithLifecycle()
     val scaffoldState: ScaffoldState = rememberScaffoldState()
 
+
     Surface(
         modifier = modifier.fillMaxSize(), color = MaterialTheme.colors.background
     ) {
@@ -62,7 +64,9 @@ fun RestaurantsListScreen(
             Column(
                 modifier = Modifier.padding(innerPadding),
             ) {
-                LocationPinScreen(screenState.currentPostCode)
+                LocationPinScreen(screenState.currentPostCode) {
+                    viewModel.showGoneDialogLocation(true)
+                }
                 if (!screenState.restaurantList.isNullOrEmpty()) {
                     RestaurantListScreen(
                         modifier = Modifier,
@@ -76,6 +80,16 @@ fun RestaurantsListScreen(
                     ocClick = { viewModel.onRetry() },
                     visible = screenState.errorMessage != null,
                 )
+                if (screenState.showDialogLocation)
+                    LocationDialogScreen(
+                        value = screenState.currentPostCode,
+                        setShowDialog = {
+                            viewModel.showGoneDialogLocation(it)
+                        }, searchByGPS = {
+                            viewModel.searchViaGPS()
+                        }) {
+                        viewModel.getRestaurantByPostCode(it)
+                    }
             }
         }
     }
@@ -100,15 +114,17 @@ private fun ScreenAppBar() {
 
 @Composable
 fun LocationPinScreen(
-    locationPostCode: String
+    locationPostCode: String,
+    onClick: () -> Unit
 ) {
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
             .height(40.dp)
             .clickable {
-
+                onClick()
             }
             .border(
                 width = 1.dp, brush = TextFieldBackground, shape = RoundedCornerShape(4.dp)
