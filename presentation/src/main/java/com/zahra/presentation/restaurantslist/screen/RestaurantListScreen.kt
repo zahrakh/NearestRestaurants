@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.zahra.domain.data.Restaurant
 import com.zahra.presentation.restaurantslist.ListState
+import com.zahra.presentation.ui.component.EmptyView
 import com.zahra.presentation.ui.component.GifImageView
 import com.zahra.presentation.ui.component.RatingView
 import com.zahra.presentation.ui.theme.NearestRestaurantsTheme
@@ -44,6 +45,8 @@ fun RestaurantListScreen(
             RestaurantList(restaurantList = screenState.restaurantList.filter { it.isOpen }) { restaurantId ->
                 onClickToDetailScreen(restaurantId)
             }
+        } else {
+            EmptyView(visible = screenState.restaurantList.isNullOrEmpty())
         }
     }
 }

@@ -12,4 +12,5 @@
     <string name="empty_field_warning">Field can not be empty</string>
     <string name="location_dialog_title">enter post code or select gps</string>
     <string name="insert_post_code_manually">Insert post code manually</string>
+    <string name="no_restaurants_around">There are no restaurants around you!\nSearch for another location</string>
 </resources>
