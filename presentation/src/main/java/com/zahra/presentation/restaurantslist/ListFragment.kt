@@ -74,22 +74,24 @@ fun RestaurantsListScreen(
                         onClickToDetailScreen = onClickToDetailScreen,
                     )
                 }
-                ProgressView(screenState.isLoading)
+                ProgressView(
+                    screenState.isLoading
+                )
                 ErrorView(
                     errorMessage = screenState.errorMessage ?: "",
                     ocClick = { viewModel.onRetry() },
                     visible = screenState.errorMessage != null,
                 )
-                if (screenState.showDialogLocation)
-                    LocationDialogScreen(
-                        value = screenState.currentPostCode,
-                        setShowDialog = {
-                            viewModel.showGoneDialogLocation(it)
-                        }, searchByGPS = {
-                            viewModel.searchViaGPS()
-                        }) {
-                        viewModel.getRestaurantByPostCode(it)
-                    }
+                if (screenState.showDialogLocation) LocationDialogScreen(
+                    value = screenState.currentPostCode,
+                    setShowDialog = {
+                        viewModel.showGoneDialogLocation(it)
+                    },
+                    searchByGPS = {
+                            
+                    }) {
+                    viewModel.getRestaurantByPostCode(it)
+                }
             }
         }
     }
@@ -111,11 +113,9 @@ private fun ScreenAppBar() {
     )
 }
 
-
 @Composable
-fun LocationPinScreen(
-    locationPostCode: String,
-    onClick: () -> Unit
+private fun LocationPinScreen(
+    locationPostCode: String, onClick: () -> Unit
 ) {
 
     Row(
@@ -151,7 +151,7 @@ fun LocationPinScreen(
 @Preview(showBackground = true)
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-fun HomeFragmentPreview() {
+private fun HomeFragmentPreview() {
     NearestRestaurantsTheme {
         RestaurantsListScreen()
     }

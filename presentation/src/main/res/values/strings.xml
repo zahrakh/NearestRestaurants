@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="desc_logo">Application Logo</string>
-    <string name="page_title">Just Eat Take Away</string>
     <string name="retry">Retry</string>
+    <string name="confirm">Confirm</string>
+    <string name="icon_image">Icon</string>
     <string name="input_view_icon">Icon</string>
     <string name="find_location">Location: %s</string>
-    <string name="location_dialog_title">enter post code or select gps</string>
-    <string name="post_code">enter postcode like: ec4m</string>
-    <string name="icon_image">Icon</string>
-    <string name="empty_field_warning">Field can not be empty</string>
-    <string name="confirm">Confirm</string>
     <string name="search_by_gps">Search By GPS</string>
+    <string name="page_title">Just Eat Take Away</string>
+    <string name="post_code">enter postcode like: ec4m</string>
+    <string name="empty_field_warning">Field can not be empty</string>
+    <string name="location_dialog_title">enter post code or select gps</string>
+    <string name="insert_post_code_manually">Insert post code manually</string>
 </resources>

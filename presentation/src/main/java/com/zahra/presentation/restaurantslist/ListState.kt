@@ -7,6 +7,7 @@ data class ListState(
     val isLoading: Boolean = false,
     val errorMessage: String? = null,
     val restaurantList: List<Restaurant>? = null,
+
     val currentPostCode: String = DEFAULT_POST_CODE,
-    val showDialogLocation:Boolean=false
-)
+    val showDialogLocation: Boolean = false,
+ )

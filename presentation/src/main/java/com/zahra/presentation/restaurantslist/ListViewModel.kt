@@ -1,5 +1,6 @@
 package com.zahra.presentation.restaurantslist
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zahra.domain.data.Either
@@ -12,6 +13,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 
 @HiltViewModel
 class ListViewModel @Inject constructor(
@@ -53,7 +55,9 @@ class ListViewModel @Inject constructor(
         _state.value = _state.value.copy(showDialogLocation = show)
     }
 
-    fun searchViaGPS() {
+
+
+    fun searchByGPS(context: Context) {
 
     }
 
