@@ -40,7 +40,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import com.google.accompanist.permissions.PermissionsRequired
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import com.zahra.presentation.R
 import com.zahra.presentation.ui.theme.OrangeDarkColor
@@ -62,14 +61,6 @@ fun LocationDialogScreen(
             Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION
         )
     )
-
-    PermissionsRequired(multiplePermissionsState = multiplePermissionState,
-        permissionsNotGrantedContent = {
-        },
-        permissionsNotAvailableContent = {
-        }) {
-        searchByGPS(true)
-    }
 
     Dialog(onDismissRequest = { setShowDialog(false) }) {
         Surface(
@@ -159,10 +150,15 @@ fun LocationDialogScreen(
 
                             Button(
                                 onClick = {
-                                    txtField.value = ""
+                                    txtField.value = "search By GPS"
                                     setValue(txtField.value)
                                     setShowDialog(false)
-                                    multiplePermissionState.launchMultiplePermissionRequest()
+                                    if (multiplePermissionState.allPermissionsGranted) {
+                                        searchByGPS(true)
+                                    } else {
+                                        multiplePermissionState.launchMultiplePermissionRequest()
+                                    }
+
                                 },
                                 shape = RoundedCornerShape(30.dp),
                                 modifier = Modifier

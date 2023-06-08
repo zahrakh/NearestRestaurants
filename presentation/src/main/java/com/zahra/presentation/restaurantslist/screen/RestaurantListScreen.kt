@@ -26,7 +26,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.zahra.domain.data.Restaurant
-import com.zahra.presentation.restaurantslist.ListState
 import com.zahra.presentation.ui.component.EmptyView
 import com.zahra.presentation.ui.component.GifImageView
 import com.zahra.presentation.ui.component.RatingView
@@ -35,19 +34,18 @@ import com.zahra.presentation.ui.theme.NearestRestaurantsTheme
 @Composable
 fun RestaurantListScreen(
     modifier: Modifier = Modifier,
-    screenState: ListState = ListState(),
+    restaurantList: List<Restaurant>? = null,
     onClickToDetailScreen: (Restaurant) -> Unit = {},
 ) {
     Column(
         modifier = modifier.fillMaxWidth(),
     ) {
-        if (!screenState.restaurantList.isNullOrEmpty()) {
-            RestaurantList(restaurantList = screenState.restaurantList.filter { it.isOpen }) { restaurantId ->
+        if (!restaurantList.isNullOrEmpty()) {
+            RestaurantList(restaurantList = restaurantList.filter { it.isOpen }) { restaurantId ->
                 onClickToDetailScreen(restaurantId)
             }
-        } else {
-            EmptyView(visible = screenState.restaurantList.isNullOrEmpty())
         }
+        EmptyView(visible = restaurantList.isNullOrEmpty())
     }
 }
 

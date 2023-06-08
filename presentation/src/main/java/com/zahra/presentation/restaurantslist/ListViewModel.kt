@@ -49,7 +49,7 @@ class ListViewModel @Inject constructor(
                 }
 
                 is Either.Error -> {
-                    _state.value = _state.value.copy(isLoading = false, errorMessage = result.error)
+                    _state.value = _state.value.copy(isLoading = false, errorMessage = result.error,   restaurantList = null)
                 }
             }
         }
@@ -62,15 +62,13 @@ class ListViewModel @Inject constructor(
             when (val result = getByLocationUseCase.invoke(lat, lon)) {
                 is Either.Success -> {
                     _state.value = _state.value.copy(
-                        restaurantList = result.data,
-                        isLoading = false
+                        restaurantList = result.data, isLoading = false
                     )
                 }
 
                 is Either.Error -> {
                     _state.value = _state.value.copy(
-                        isLoading = false,
-                        errorMessage = result.error
+                        restaurantList = null, isLoading = false, errorMessage = result.error
                     )
                 }
             }
@@ -96,7 +94,7 @@ class ListViewModel @Inject constructor(
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             _state.value = _state.value.copy(
-                errorMessage = context.getString(R.string.insert_post_code_manually)
+                errorMessage = context.getString(R.string.no_restaurants_around)
             )
             return
         }

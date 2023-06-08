@@ -71,7 +71,7 @@ fun RestaurantsListScreen(
                 if (!screenState.restaurantList.isNullOrEmpty()) {
                     RestaurantListScreen(
                         modifier = Modifier,
-                        screenState = screenState,
+                        restaurantList = screenState.restaurantList,
                         onClickToDetailScreen = onClickToDetailScreen,
                     )
                 }
