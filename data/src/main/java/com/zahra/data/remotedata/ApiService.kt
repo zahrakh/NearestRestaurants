@@ -12,7 +12,7 @@ interface ApiService {
 
     @GET("restaurants/bypostcode/{postCode}")
     suspend fun getRestaurantsByPostCode(
-        @Path("postCode") code: String?,
+        @Path("postCode") postCode: String?,
     ): RestaurantsResponseDto
 
     @GET("restaurants/bylatlong?latitude={lat}&longitude={lon}")
