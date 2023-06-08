@@ -31,6 +31,8 @@ class ListViewModel @Inject constructor(
     private val _state: MutableStateFlow<ListState> = MutableStateFlow(ListState())
     val state = _state.asStateFlow()
 
+    var lastSearchState: LastSearchState = LastSearchState.POSTCODE
+
     var job: Job? = null
 
     init {
@@ -38,6 +40,8 @@ class ListViewModel @Inject constructor(
     }
 
     fun getRestaurantByPostCode(postCode: String? = DEFAULT_POST_CODE) {
+        lastSearchState = LastSearchState.POSTCODE
+
         job?.cancel()
         job = viewModelScope.launch(Dispatchers.IO) {
             _state.value = _state.value.copy(currentPostCode = postCode ?: DEFAULT_POST_CODE)
@@ -49,13 +53,19 @@ class ListViewModel @Inject constructor(
                 }
 
                 is Either.Error -> {
-                    _state.value = _state.value.copy(isLoading = false, errorMessage = result.error,   restaurantList = null)
+                    _state.value = _state.value.copy(
+                        isLoading = false,
+                        errorMessage = result.error,
+                        restaurantList = null
+                    )
                 }
             }
         }
     }
 
     private fun getRestaurantByLocation(lat: Double? = 0.0, lon: Double? = 0.0) {
+        lastSearchState = LastSearchState.GPS
+
         job?.cancel()
         job = viewModelScope.launch(Dispatchers.IO) {
             _state.value = _state.value.copy(isLoading = true, errorMessage = null)
@@ -76,7 +86,11 @@ class ListViewModel @Inject constructor(
     }
 
     fun onRetry() {
-        getRestaurantByPostCode()
+        if (lastSearchState == LastSearchState.GPS) {
+            getRestaurantByLocation()
+        } else {
+            getRestaurantByPostCode()
+        }
     }
 
     fun showGoneDialogLocation(show: Boolean = false) {

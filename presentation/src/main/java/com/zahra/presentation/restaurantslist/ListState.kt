@@ -10,4 +10,10 @@ data class ListState(
 
     val currentPostCode: String = DEFAULT_POST_CODE,
     val showDialogLocation: Boolean = false,
- )
+    val askLocationPermission:Boolean=false
+)
+
+enum class LastSearchState {
+    GPS,
+    POSTCODE
+}
