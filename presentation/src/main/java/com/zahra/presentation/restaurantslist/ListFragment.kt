@@ -1,5 +1,6 @@
 package com.zahra.presentation.restaurantslist
 
+import android.Manifest
 import android.content.res.Configuration
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -32,25 +33,37 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.MultiplePermissionsState
+import com.google.accompanist.permissions.PermissionsRequired
+import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import com.zahra.domain.data.Restaurant
 import com.zahra.presentation.R
 import com.zahra.presentation.restaurantslist.screen.LocationDialogScreen
 import com.zahra.presentation.restaurantslist.screen.RestaurantListScreen
+import com.zahra.presentation.ui.component.Button
 import com.zahra.presentation.ui.component.ErrorView
 import com.zahra.presentation.ui.component.ProgressView
 import com.zahra.presentation.ui.shape.TextFieldBackground
 import com.zahra.presentation.ui.theme.NearestRestaurantsTheme
 import com.zahra.presentation.ui.theme.OrangeColor
 
+@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun RestaurantsListScreen(
     modifier: Modifier = Modifier,
     viewModel: ListViewModel = hiltViewModel(),
     onClickToDetailScreen: (Restaurant) -> Unit = {},
 ) {
+    val context = LocalContext.current
+
     val screenState by viewModel.state.collectAsStateWithLifecycle()
     val scaffoldState: ScaffoldState = rememberScaffoldState()
-    val context = LocalContext.current
+    val multiplePermissionState = rememberMultiplePermissionsState(
+        permissions = listOf(
+            Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION
+        )
+    )
 
     Surface(
         modifier = modifier.fillMaxSize(), color = MaterialTheme.colors.background
@@ -65,9 +78,17 @@ fun RestaurantsListScreen(
             Column(
                 modifier = Modifier.padding(innerPadding),
             ) {
-                LocationPinScreen(screenState.currentPostCode) {
-                    viewModel.showGoneDialogLocation(true)
-                }
+                LocationPinScreen(screenState.currentPostCode,
+                    openDialog = { viewModel.showGoneDialogLocation(true) },
+                    requestForGPS = {
+                        if (multiplePermissionState.allPermissionsGranted) {
+                            viewModel.searchByGPS(context)
+                        } else {
+                            multiplePermissionState.launchMultiplePermissionRequest()
+                            viewModel.requestForPermission(true)
+                        }
+                    }
+                )
                 if (!screenState.restaurantList.isNullOrEmpty()) {
                     RestaurantListScreen(
                         modifier = Modifier,
@@ -87,11 +108,15 @@ fun RestaurantsListScreen(
                     value = screenState.currentPostCode,
                     setShowDialog = {
                         viewModel.showGoneDialogLocation(it)
-                    },
-                    searchByGPS = {
-                            viewModel.searchByGPS(context)
                     }) {
                     viewModel.getRestaurantByPostCode(it)
+                }
+                if (screenState.showLocationRequest) {
+                    viewModel.requestForPermission(false)
+                    LocationPermissions(
+                        multiplePermissionState,
+                        onGrant = { viewModel.searchByGPS(context = context) }
+                    )
                 }
             }
         }
@@ -116,23 +141,25 @@ private fun ScreenAppBar() {
 
 @Composable
 private fun LocationPinScreen(
-    locationPostCode: String, onClick: () -> Unit
+    locationPostCode: String,
+    requestForGPS: () -> Unit,
+    openDialog: () -> Unit
 ) {
 
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
-            .height(40.dp)
-            .clickable {
-                onClick()
-            }
+            .height(60.dp)
             .border(
                 width = 1.dp, brush = TextFieldBackground, shape = RoundedCornerShape(4.dp)
             ),
         verticalAlignment = Alignment.CenterVertically,
 
         ) {
+        Button(
+            text = stringResource(id = R.string.search_by_gps), onClick = requestForGPS
+        )
         Icon(
             imageVector = Icons.Default.ArrowDropDown,
             modifier = Modifier.padding(horizontal = 4.dp),
@@ -142,10 +169,30 @@ private fun LocationPinScreen(
         Text(
             text = stringResource(
                 id = R.string.find_location, locationPostCode
-            ), color = Color.Gray
+            ),
+            color = Color.Gray,
+
+            modifier = Modifier.clickable {
+                openDialog()
+            },
         )
     }
+}
 
+
+@OptIn(ExperimentalPermissionsApi::class)
+@Composable
+fun LocationPermissions(
+    multiplePermissionState: MultiplePermissionsState,
+    onGrant: () -> Unit
+) {
+    PermissionsRequired(
+        multiplePermissionsState = multiplePermissionState,
+        permissionsNotGrantedContent = { /* ... */ },
+        permissionsNotAvailableContent = { /* ... */ }
+    ) {
+        onGrant()
+    }
 }
 
 

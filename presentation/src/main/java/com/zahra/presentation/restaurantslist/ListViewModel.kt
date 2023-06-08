@@ -123,6 +123,10 @@ class ListViewModel @Inject constructor(
         }
     }
 
+    fun requestForPermission(showLocationRequest:Boolean) {
+        _state.value=_state.value.copy(showLocationRequest=showLocationRequest)
+    }
+
 }
 
 

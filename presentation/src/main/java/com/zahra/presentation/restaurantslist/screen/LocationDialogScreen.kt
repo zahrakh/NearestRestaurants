@@ -1,7 +1,6 @@
 package com.zahra.presentation.restaurantslist.screen
 
 
-import android.Manifest
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -39,28 +38,18 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
-import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import com.zahra.presentation.R
 import com.zahra.presentation.ui.theme.OrangeDarkColor
 
 
-@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun LocationDialogScreen(
     value: String,
     setShowDialog: (Boolean) -> Unit,
-    searchByGPS: (Boolean) -> Unit,
     setValue: (String) -> Unit
 ) {
     val txtFieldError = remember { mutableStateOf("") }
     val txtField = remember { mutableStateOf(value) }
-
-    val multiplePermissionState = rememberMultiplePermissionsState(
-        permissions = listOf(
-            Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION
-        )
-    )
 
     Dialog(onDismissRequest = { setShowDialog(false) }) {
         Surface(
@@ -143,31 +132,6 @@ fun LocationDialogScreen(
                             ) {
                                 Text(
                                     text = stringResource(id = R.string.confirm), style = TextStyle(
-                                        fontSize = 14.sp,
-                                    )
-                                )
-                            }
-
-                            Button(
-                                onClick = {
-                                    txtField.value = "search By GPS"
-                                    setValue(txtField.value)
-                                    setShowDialog(false)
-                                    if (multiplePermissionState.allPermissionsGranted) {
-                                        searchByGPS(true)
-                                    } else {
-                                        multiplePermissionState.launchMultiplePermissionRequest()
-                                    }
-
-                                },
-                                shape = RoundedCornerShape(30.dp),
-                                modifier = Modifier
-                                    .padding(4.dp)
-                                    .wrapContentSize()
-                            ) {
-                                Text(
-                                    text = stringResource(id = R.string.search_by_gps),
-                                    style = TextStyle(
                                         fontSize = 14.sp,
                                     )
                                 )

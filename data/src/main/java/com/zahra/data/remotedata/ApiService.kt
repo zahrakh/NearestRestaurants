@@ -3,6 +3,7 @@ package com.zahra.data.remotedata
 import com.zahra.data.remotedata.dto.RestaurantsResponseDto
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ApiService {
 
@@ -15,10 +16,10 @@ interface ApiService {
         @Path("postCode") postCode: String?,
     ): RestaurantsResponseDto
 
-    @GET("restaurants/bylatlong?latitude={lat}&longitude={lon}")
+    @GET("restaurants/bylatlong")
     suspend fun getRestaurantsByLocation(
-        @Path("lat") lat: Double?,
-        @Path("lon") lon: Double?,
+        @Query("latitude") lat: Double?,
+        @Query("longitude") lon: Double?,
     ): RestaurantsResponseDto
 
 }
