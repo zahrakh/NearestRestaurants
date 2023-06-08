@@ -14,7 +14,7 @@ import org.junit.Test
 import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 
-class MoviesRepositoryImplTest {
+class TakeAwayRepositoryImpTest {
 
     private lateinit var takeAwayRemoteDataSource: TakeAwayRemoteDataSource
     private lateinit var repository: TakeAwayRepository
