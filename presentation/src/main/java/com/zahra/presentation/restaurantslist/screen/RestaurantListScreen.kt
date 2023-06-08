@@ -41,7 +41,7 @@ fun RestaurantListScreen(
         modifier = modifier.fillMaxWidth(),
     ) {
         if (!restaurantList.isNullOrEmpty()) {
-            RestaurantList(restaurantList = restaurantList.filter { it.isOpen }) { restaurantId ->
+            RestaurantList(restaurantList = restaurantList) { restaurantId ->
                 onClickToDetailScreen(restaurantId)
             }
         }

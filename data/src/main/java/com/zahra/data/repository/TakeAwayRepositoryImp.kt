@@ -5,8 +5,9 @@ import com.zahra.data.remotedata.takeawayapi.toRestaurantList
 import com.zahra.domain.data.Either
 import com.zahra.domain.data.Restaurant
 import com.zahra.domain.repository.TakeAwayRepository
+import javax.inject.Inject
 
-class TakeAwayRepositoryImp constructor(
+class TakeAwayRepositoryImp @Inject constructor(
     private val takeAwayRemoteDataSource: TakeAwayRemoteDataSource
 ) : TakeAwayRepository {
     override suspend fun getRestaurantListByPostCode(

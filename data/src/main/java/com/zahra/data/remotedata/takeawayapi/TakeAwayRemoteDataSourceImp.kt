@@ -6,8 +6,9 @@ import com.zahra.data.remotedata.dto.RestaurantsResponseDto
 import com.zahra.domain.data.Either
 import retrofit2.HttpException
 import java.io.IOException
+import javax.inject.Inject
 
-class TakeAwayRemoteDataSourceImp(
+class TakeAwayRemoteDataSourceImp @Inject constructor(
     private val service: ApiService,
     private var stringProvider: StringProvider
 ) : TakeAwayRemoteDataSource {

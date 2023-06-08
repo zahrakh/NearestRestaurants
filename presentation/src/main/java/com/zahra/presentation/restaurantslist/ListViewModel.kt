@@ -10,6 +10,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.zahra.domain.data.Either
+import com.zahra.domain.di.DispatcherProvider
 import com.zahra.domain.usecase.GetRestaurantsByLocationUseCase
 import com.zahra.domain.usecase.GetRestaurantsByPostCodeUseCase
 import com.zahra.presentation.R
@@ -26,6 +27,7 @@ import javax.inject.Inject
 class ListViewModel @Inject constructor(
     private val getByPostCodeUseCase: GetRestaurantsByPostCodeUseCase,
     private val getByLocationUseCase: GetRestaurantsByLocationUseCase,
+    private val dispatcherProvider: DispatcherProvider
 ) : ViewModel() {
 
     private val _state: MutableStateFlow<ListState> = MutableStateFlow(ListState())
@@ -35,21 +37,23 @@ class ListViewModel @Inject constructor(
 
     var job: Job? = null
 
-    init {
-        getRestaurantByPostCode()
-    }
 
     fun getRestaurantByPostCode(postCode: String? = DEFAULT_POST_CODE) {
         lastSearchState = LastSearchState.POSTCODE
 
         job?.cancel()
-        job = viewModelScope.launch(Dispatchers.IO) {
-            _state.value = _state.value.copy(currentPostCode = postCode ?: DEFAULT_POST_CODE)
-            _state.value = _state.value.copy(isLoading = true, errorMessage = null)
+        job = viewModelScope.launch(dispatcherProvider.io()) {
+            _state.value = _state.value.copy(
+                isLoading = true,
+                errorMessage = null,
+                currentPostCode = postCode ?: DEFAULT_POST_CODE
+            )
             when (val result = getByPostCodeUseCase.invoke(postCode)) {
                 is Either.Success -> {
-                    _state.value =
-                        _state.value.copy(restaurantList = result.data, isLoading = false)
+                    _state.value = _state.value.copy(
+                        restaurantList = result.data?.filter { it.isOpen },
+                        isLoading = false
+                    )
                 }
 
                 is Either.Error -> {
@@ -63,7 +67,7 @@ class ListViewModel @Inject constructor(
         }
     }
 
-    private fun getRestaurantByLocation(lat: Double? = 0.0, lon: Double? = 0.0) {
+    fun getRestaurantByLocation(lat: Double? = 0.0, lon: Double? = 0.0) {
         lastSearchState = LastSearchState.GPS
 
         job?.cancel()
@@ -72,7 +76,8 @@ class ListViewModel @Inject constructor(
             when (val result = getByLocationUseCase.invoke(lat, lon)) {
                 is Either.Success -> {
                     _state.value = _state.value.copy(
-                        restaurantList = result.data, isLoading = false
+                        restaurantList = result.data?.filter { it.isOpen },
+                        isLoading = false
                     )
                 }
 
@@ -123,8 +128,8 @@ class ListViewModel @Inject constructor(
         }
     }
 
-    fun requestForPermission(showLocationRequest:Boolean) {
-        _state.value=_state.value.copy(showLocationRequest=showLocationRequest)
+    fun requestForPermission(showLocationRequest: Boolean) {
+        _state.value = _state.value.copy(showLocationRequest = showLocationRequest)
     }
 
 }
