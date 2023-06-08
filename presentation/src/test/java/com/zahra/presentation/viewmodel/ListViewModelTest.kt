@@ -81,4 +81,31 @@ class ListViewModelTest {
         Assert.assertEquals(true, isOpen)
     }
 
+
+    @Test
+    fun `test get restaurants by Location and check result`() = runTest {
+        locationUseCase.stub {
+            onBlocking {
+                invoke(0.0,0.0)
+            }.doReturn(
+                Either.Success<ArrayList<Restaurant>?, String>(
+                    arrayListOf(
+                        Restaurant(
+                            id = 1,
+                            name = "Parla Pizza",
+                            logoUrl = "https://shilaLogoUrl.gif",
+                            isOpen = true,
+                            rate = 2.9f,
+                            cuisineTypes = null,
+                        )
+                    )
+                )
+            )
+        }
+
+        listViewModel.getRestaurantByLocation(0.0,0.0)
+        val name = listViewModel.state.value.restaurantList?.get(0)?.name
+        Assert.assertEquals("Parla Pizza", name)
+    }
+
 }

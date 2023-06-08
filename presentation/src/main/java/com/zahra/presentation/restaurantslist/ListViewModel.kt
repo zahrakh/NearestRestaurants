@@ -71,7 +71,7 @@ class ListViewModel @Inject constructor(
         lastSearchState = LastSearchState.GPS
 
         job?.cancel()
-        job = viewModelScope.launch(Dispatchers.IO) {
+        job = viewModelScope.launch(dispatcherProvider.io()) {
             _state.value = _state.value.copy(isLoading = true, errorMessage = null)
             when (val result = getByLocationUseCase.invoke(lat, lon)) {
                 is Either.Success -> {
