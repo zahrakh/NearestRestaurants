@@ -27,7 +27,7 @@ core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx
 lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle-runtime-ktx" }
 #ui compose
 compose_nav = { group = "androidx.navigation", name = "navigation-compose", version.ref = "compose_nav" }
-material = { group = "androidx.compose.material", name = "material" }
+material = { group = "androidx.compose.material", name = "material", version="compose_ui_version " }
 activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
 compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
 ui = { group = "androidx.compose.ui", name = "ui" }
