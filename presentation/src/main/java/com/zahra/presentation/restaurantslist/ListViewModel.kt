@@ -16,7 +16,6 @@ import com.zahra.domain.usecase.GetRestaurantsByPostCodeUseCase
 import com.zahra.presentation.R
 import com.zahra.presentation.utils.DEFAULT_POST_CODE
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
